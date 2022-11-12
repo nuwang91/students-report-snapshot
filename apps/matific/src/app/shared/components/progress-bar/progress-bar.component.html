@@ -1,0 +1,9 @@
+<div class="bar">
+  <div
+    class="section"
+    *ngFor="let value of values"
+    [ngStyle]="{ 'width': value.percentage + '%', 'background-color': value.color }"
+  ></div>
+</div>
+
+<nugu-legend [values]="_legendValues"></nugu-legend>
