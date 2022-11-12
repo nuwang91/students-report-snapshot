@@ -9,7 +9,7 @@ interface IAttempts {
   values: number[];
 }
 
-export interface IActivities {
+export interface IActivity {
   id: number;
   content: string;
   attempts: IAttempts;
@@ -17,6 +17,12 @@ export interface IActivities {
   time: string;
   skill: string;
   type: string;
+}
+
+export interface IFullActivity extends IActivity {
+  result: number,
+  date: string,
+  color?: string
 }
 
 export interface IActivityResponse {
