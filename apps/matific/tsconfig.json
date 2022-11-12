@@ -22,6 +22,9 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "strictPropertyInitialization": false,
+    "paths": {
+      "@matific/*": ["apps/matific/src/app/*"],
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
