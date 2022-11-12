@@ -1,0 +1,7 @@
+{
+  "/production/matific-test-activities": {
+    "target": "https://ljifg6p8cd.execute-api.us-east-1.amazonaws.com",
+    "secure": true,
+    "changeOrigin": true
+  }
+}
