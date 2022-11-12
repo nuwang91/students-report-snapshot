@@ -1,1 +1,7 @@
-<p-calendar [inputId]="id" [(ngModel)]="value" [showIcon]="showIcon" (onSelect)="onSelect($event)"></p-calendar>
+<p-calendar
+  [inputId]="id"
+  [(ngModel)]="value"
+  dateFormat="dd-mm-yy"
+  [showIcon]="showIcon"
+  (onSelect)="onSelect($event)"
+></p-calendar>
