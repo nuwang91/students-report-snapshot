@@ -1,20 +1,21 @@
 import { Injectable } from '@angular/core';
-import { IActivities } from '@matific/core/interfaces/common.interfaces';
-import { Observable, Subject } from 'rxjs';
+import { IActivity } from '@matific/core/interfaces/common.interfaces';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NuguActivitiesService {
 
-  private _activitiesChanged: Subject<IActivities[]> = new Subject<IActivities[]>();
-  activitiesChanged: Observable<IActivities[]> = this._activitiesChanged;
-  private _activities: IActivities[] = [];
+  private _activitiesChanged$: BehaviorSubject<IActivity[]> = new BehaviorSubject<IActivity[]>([]);
+  activitiesChanged$: Observable<IActivity[]> = this._activitiesChanged$;
+  private _activities: IActivity[] = [];
 
 
-  setActivities(activities: IActivities[]): void {
+  setActivities(activities: IActivity[]): void {
     this._activities = activities;
-    this._activitiesChanged.next(this._activities.slice());
+    console.log(this._activities);
+    this._activitiesChanged$.next(this._activities.slice());
   }
 
 }
