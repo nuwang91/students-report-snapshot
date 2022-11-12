@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { IClass } from '@matific/core/interfaces/common';
+import { IClass } from '@matific/core/interfaces/common.interfaces';
 import { Observable, of, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ClassService {
+export class NuguClassService {
 
   private _classesChanged: Subject<IClass[]> = new Subject<IClass[]>();
   classesChanged: Observable<IClass[]> = this._classesChanged;

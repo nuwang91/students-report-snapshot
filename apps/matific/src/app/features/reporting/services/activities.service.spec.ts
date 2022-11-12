@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { NuguClassService } from './class.service';
+import { NuguActivitiesService } from './activities.service';
 
-describe('ClassService', () => {
-  let service: NuguClassService;
+describe('ActivitiesService', () => {
+  let service: NuguActivitiesService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(NuguClassService);
+    service = TestBed.inject(NuguActivitiesService);
   });
 
   it('should be created', () => {
