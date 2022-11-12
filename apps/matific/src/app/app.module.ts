@@ -8,7 +8,7 @@ import { ButtonModule } from 'primeng/button';
 import { AppComponent } from './app.component';
 import { NuguAppRoutingModule } from './app-routing.module';
 import { NuguAuthenticationModule } from './core/components/authentication/authentication.module';
-import { NuguReportModule } from './features/reporting/components/report/report.module';
+import { NuguReportPageModule } from './features/reporting/pages/report-page/report-page.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,8 +18,8 @@ import { NuguReportModule } from './features/reporting/components/report/report.
     HttpClientModule,
     NuguAppRoutingModule,
     NuguAuthenticationModule,
-    NuguReportModule,
     ButtonModule,
+    NuguReportPageModule
   ],
   providers: [],
   bootstrap: [AppComponent],
