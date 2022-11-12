@@ -1,0 +1,74 @@
+<h1 class="heading">Reporting - Student Snapshot</h1>
+
+<div class="container">
+  <div class="input-row">
+    <div class="input-conatiner">
+      <label for="id-class">Class</label>
+      <nugu-dropdown
+        [id]="'id-class'"
+        [options]="(_classes$ | async) ?? []"
+        [optionName]="'name'"
+        [placeholder]="'Select a Class'"
+        (valueChange)="_classChanged($event)"
+      ></nugu-dropdown>
+    </div>
+    <div class="input-conatiner">
+      <label for="id-student">Student</label>
+      <nugu-dropdown
+        [id]="'id-student'"
+        [options]="(_students$ | async) ?? []"
+        [placeholder]="'Select a Student'"
+        (valueChange)="_studentChanged($event)"
+      ></nugu-dropdown>
+    </div>
+    <div class="date-range-container">
+      <div class="input-conatiner">
+        <label for="id-date-range">Date Range</label>
+        <div class="date-range-fields">
+          <nugu-date-picker
+            [id]="'id-date-range'"
+            [showIcon]="true"
+            (valueChanged)="_fromDateChanged($event)"
+          ></nugu-date-picker>
+          <span>to</span>
+          <nugu-date-picker
+            [showIcon]="true"
+            (valueChanged)="_toDateChanged($event)"
+          ></nugu-date-picker>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="info">
+    <span>overall results for the period:</span>
+    <span class="selectd-date-range">{{ _selectedDateRange$ | async }}</span>
+  </div>
+
+  <div class="progress-container">
+    <nugu-status-bar [values]="progress"></nugu-status-bar>
+  </div>
+
+  <!-- <nugu-table [dataSource]="(_activities$ | async) ?? []" [columns]="_columns"></nugu-table> -->
+  <p-table [value]="(_activities$ | async) ?? []" [scrollable]="true" scrollHeight="400px">
+    <ng-template pTemplate="header">
+      <tr>
+        <th *ngFor="let column of _columns">
+          {{ column.title }}
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-row>
+      <tr>
+        <td *ngFor="let column of _columns">
+          <ng-container *ngIf="column.name === 'result';else elseTemplate">
+            <span [nuguResultColor]="row[column.name]">{{ row[column.name] }}</span>
+          </ng-container>
+          <ng-template #elseTemplate>
+            {{ row[column.name] }}
+          </ng-template>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

@@ -1,0 +1,46 @@
+
+
+.heading {
+  font-weight: normal;
+}
+
+.input-row {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.input-conatiner {
+  display: flex;
+  flex-direction: column;
+}
+
+.date-range-container {
+  display: flex;
+
+  nugu-date-picker:first-of-type {
+    margin-inline-end: 1rem;
+  }
+
+  nugu-date-picker:last-of-type {
+    margin-inline-start: 1rem;
+  }
+}
+
+.info {
+  margin-block-start: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .selectd-date-range{
+    font-weight: bold;
+  }
+}
+
+.progress-container {
+  margin-inline-start: 20%;
+  margin-inline-end: 20%;
+  margin-block-start: 1rem;
+  margin-block-end: 1rem;
+}
