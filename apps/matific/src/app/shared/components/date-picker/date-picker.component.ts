@@ -25,7 +25,14 @@ export class NuguDatePickerComponent {
   @Output()
   readonly valueSelected: EventEmitter<any> = new EventEmitter<any>();
 
+  @Output()
+  readonly valueChanged: EventEmitter<Date | null> = new EventEmitter<Date | null>();
+
   onSelect(event: any) {
     this.valueSelected.emit(event);
+  }
+
+  onClose() {
+    this.valueChanged.emit(this.value);
   }
 }
