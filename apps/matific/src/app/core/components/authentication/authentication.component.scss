@@ -1,0 +1,26 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+}
+
+form {
+  align-self: center;
+}
+
+.user-group,
+.password-group {
+  display: flex;
+  flex-direction: column;
+  margin-block-end: 2rem;
+}
+
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.submit {
+  margin-inline-end: 1rem;
+}

@@ -1,1 +1,62 @@
-<p>authentication works!</p>
+<div class="login-container">
+  <form [formGroup]="userForm" (ngSubmit)="login()">
+    <div class="user-group">
+      <label for="username">Username</label>
+      <input
+        id="username"
+        type="email"
+        aria-describedby="username-help"
+        [ngClass]="{
+          'ng-invalid':
+            userForm.get('user')?.touched && !userForm.get('user')?.valid
+        }"
+        pInputText
+        formControlName="user"
+      />
+      <small
+        *ngIf="userForm.get('user')?.touched && !userForm.get('user')?.valid"
+        id="username-help"
+        class="p-error"
+        >Username is invalid.</small
+      >
+    </div>
+
+    <div class="password-group">
+      <label for="password">Password</label>
+      <input
+        id="password"
+        type="password"
+        aria-describedby="password-help"
+        [ngClass]="{
+          'ng-invalid':
+            userForm.get('password')?.touched &&
+            !userForm.get('password')?.valid
+        }"
+        pInputText
+        formControlName="password"
+      />
+      <small
+        *ngIf="
+          userForm.get('password')?.touched && !userForm.get('password')?.valid
+        "
+        id="password-help"
+        class="p-error"
+        >Password is invalid.</small
+      >
+    </div>
+
+    <div class="button-container">
+      <p-button
+        class="submit"
+        type="submit"
+        [disabled]="!userForm.valid"
+        [label]="isLoginMode ? 'Login' : 'Sign Up'"
+      ></p-button>
+      <p-button
+        type="button"
+        [label]="'Switch to ' + (isLoginMode ? 'Sign Up' : 'Login')"
+        (onClick)="onSwitchMode()"
+      ></p-button>
+    </div>
+  </form>
+</div>
