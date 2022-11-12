@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { NuguAppRoutingModule } from './app-routing.module';
 import { NuguAuthenticationModule } from './core/components/authentication/authentication.module';
+import { NuguReportModule } from './features/reporting/components/report/report.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -14,7 +15,8 @@ import { NuguAuthenticationModule } from './core/components/authentication/authe
     BrowserAnimationsModule,
     HttpClientModule,
     NuguAppRoutingModule,
-    NuguAuthenticationModule
+    NuguAuthenticationModule,
+    NuguReportModule
   ],
   providers: [],
   bootstrap: [AppComponent],
