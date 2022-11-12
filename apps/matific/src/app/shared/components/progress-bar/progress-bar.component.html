@@ -1,9 +1,7 @@
-<div class="bar">
+<div class="progress-bar-bar">
   <div
-    class="section"
+    class="progress-bar-section"
     *ngFor="let value of values"
     [ngStyle]="{ 'width': value.percentage + '%', 'background-color': value.color }"
   ></div>
 </div>
-
-<nugu-legend [values]="_legendValues"></nugu-legend>

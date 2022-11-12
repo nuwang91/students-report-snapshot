@@ -2,8 +2,6 @@ import {
   ChangeDetectionStrategy,
   Component,
   Input,
-  OnChanges,
-  SimpleChanges,
 } from '@angular/core';
 import { ILegend } from '../legend/legend.component';
 
@@ -19,21 +17,21 @@ export interface IProgressBar {
   styleUrls: ['./progress-bar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NuguProgressBarComponent implements OnChanges {
+export class NuguProgressBarComponent {
   @Input()
   values: IProgressBar[] = [];
 
   _legendValues: ILegend[] = [];
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (!!changes['values'] && !!changes['values'].currentValue) {
-      this._legendValues = this.values.map((value) => {
-        return {
-          status: value.status,
-          color: value.color,
-          percentage: value.percentage,
-        };
-      });
-    }
-  }
+  // ngOnChanges(changes: SimpleChanges): void {
+  //   if (!!changes['values'] && !!changes['values'].currentValue) {
+  //     this._legendValues = this.values.map((value) => {
+  //       return {
+  //         status: value.status,
+  //         color: value.color,
+  //         percentage: value.percentage,
+  //       };
+  //     });
+  //   }
+  // }
 }
