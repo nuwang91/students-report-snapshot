@@ -37,6 +37,44 @@ export class NuguActivitiesFilterService {
           );
         })
       );
+    } else if(className && !studentName && fromDate && !toDate) {
+      return this._classService.getAllStudentsInClass$(className).pipe(
+        switchMap((students) => {
+          return this._activitiesService.activitiesChanged$.pipe(
+            map((activities) => {
+              return activities.filter((activity) =>
+                students.includes(activity.student)
+              );
+            }),
+            map((activities) => this._transformToFullActivity(activities)),
+            map((fullActivities) => {
+              return fullActivities.filter((activity) => {
+                const activityDate = NuguCommon.getDate(activity.date);
+                return activityDate >= fromDate;
+              });
+            })
+          );
+        })
+      );
+    } else if(className && !studentName && !fromDate && toDate) {
+      return this._classService.getAllStudentsInClass$(className).pipe(
+        switchMap((students) => {
+          return this._activitiesService.activitiesChanged$.pipe(
+            map((activities) => {
+              return activities.filter((activity) =>
+                students.includes(activity.student)
+              );
+            }),
+            map((activities) => this._transformToFullActivity(activities)),
+            map((fullActivities) => {
+              return fullActivities.filter((activity) => {
+                const activityDate = NuguCommon.getDate(activity.date);
+                return activityDate <= toDate;
+              });
+            })
+          );
+        })
+      );
     } else if(className && studentName && !fromDate && !toDate) {
       return this._activitiesService.activitiesChanged$.pipe(
         map((activities) => {
