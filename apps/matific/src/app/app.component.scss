@@ -5,6 +5,18 @@
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
+
+  button {
+    margin-inline-start: auto;
+    color: #EB6440;
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+          background-color: #EB6440;
+          color: #D6E4E5;
+      }
+  }
+  }
 }
 
 .main {

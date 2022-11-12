@@ -27,7 +27,7 @@ export class NuguAuthGuardService {
     | UrlTree
     | Promise<boolean | UrlTree>
     | Observable<boolean | UrlTree> {
-    return this.authenticationService.user.pipe(
+    return this.authenticationService.user$.pipe(
       take(1),
       map((user) => {
         const isAuth = !!user;

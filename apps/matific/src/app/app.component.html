@@ -1,4 +1,6 @@
-<nav class="navigator"></nav>
+<nav class="navigator">
+  <button *ngIf="hasLoggedInUser$ | async" pButton pRipple type="button" label="Logout" class="p-button-text" (click)="logout()"></button>
+</nav>
 <main class="main">
   <router-outlet></router-outlet>
 </main>
