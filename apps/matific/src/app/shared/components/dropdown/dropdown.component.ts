@@ -14,6 +14,9 @@ import {
 })
 export class NuguDropdownComponent {
   @Input()
+  id: string = '';
+
+  @Input()
   options: any[] = [];
 
   @Input()
@@ -24,6 +27,7 @@ export class NuguDropdownComponent {
 
   @Input()
   optionName: string = '';
+
 
   @Output()
   readonly valueChange: EventEmitter<any> = new EventEmitter<any>();
