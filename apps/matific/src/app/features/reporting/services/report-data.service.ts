@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
-  IActivities,
   IActivityResponse,
   IClass,
 } from '@matific/core/interfaces/common.interfaces';
@@ -26,11 +25,15 @@ export class NuguReportDataService {
   ) {}
 
   fetchClasses() {
-    return this._http.get<IClass[]>(`${this.API_URL}${NuguReportDataService.Classes_End_Point}`).pipe(
-      tap((classes) => {
-        this._classService.setClasses(classes);
-      })
-    );
+    return this._http
+      .get<IClass[]>(
+        `${this.API_URL}${NuguReportDataService.Classes_End_Point}`
+      )
+      .pipe(
+        tap((classes) => {
+          this._classService.setClasses(classes);
+        })
+      );
   }
 
   fetchActivities() {
