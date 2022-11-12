@@ -14,6 +14,9 @@ import {
 })
 export class NuguDatePickerComponent {
   @Input()
+  id: string = '';
+
+  @Input()
   value: Date;
 
   @Input()
