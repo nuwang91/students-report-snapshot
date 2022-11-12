@@ -1,1 +1,6 @@
-<p>legend works!</p>
+<div class="legend-container">
+  <div class="legend-item" *ngFor="let value of values">
+    <div class="legend-box" [style.background-color]="value.color"></div>
+    <span class="legend-text">{{value.status}} ({{value.percentage}}%)</span>
+  </div>
+</div>

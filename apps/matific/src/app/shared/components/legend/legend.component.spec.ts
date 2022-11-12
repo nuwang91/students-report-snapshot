@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LegendComponent } from './legend.component';
+import { NuguLegendComponent } from './legend.component';
 
-describe('LegendComponent', () => {
-  let component: LegendComponent;
-  let fixture: ComponentFixture<LegendComponent>;
+describe('NuguLegendComponent', () => {
+  let component: NuguLegendComponent;
+  let fixture: ComponentFixture<NuguLegendComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [LegendComponent],
+      declarations: [NuguLegendComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(LegendComponent);
+    fixture = TestBed.createComponent(NuguLegendComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

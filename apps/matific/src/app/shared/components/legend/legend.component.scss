@@ -1,0 +1,16 @@
+.legend-container {
+  display: flex;
+  font-size: 10px;
+  justify-content: space-between;
+}
+
+.legend-item {
+  display: flex;
+
+  .legend-box {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 0.125rem;
+    margin-inline-end: 0.25rem;
+  }
+}
