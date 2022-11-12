@@ -29,4 +29,8 @@ export class NuguReportComponent {
   cityChanged(event: any) {
     console.log(event);
   }
+
+  datePicked(event: any) {
+    console.log(event);
+  }
 }
