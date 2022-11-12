@@ -1,0 +1,13 @@
+.navigator {
+  background-color: #EFF5F5;
+  height: 3.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.main {
+  height: calc(100vh - 3.5rem);
+  overflow: hidden;
+}
