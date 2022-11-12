@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { Observable } from 'rxjs';
 
@@ -27,7 +28,8 @@ export class NuguAuthenticationComponent {
   }
 
   constructor(
-    private authenticationService: NuguAuthenticationService
+    private authenticationService: NuguAuthenticationService,
+    private router: Router
   ) {}
 
   login() {
@@ -49,6 +51,7 @@ export class NuguAuthenticationComponent {
     authObs.subscribe({
       next: (resData) => {
         console.log(resData);
+        this.router.navigate(['/report'])
       },
       error: (errorMessage) => {
         console.log(errorMessage);
