@@ -9,6 +9,7 @@ import {
 import { map, Observable, take } from 'rxjs';
 
 import { NuguAuthenticationService } from '../services/authentication.service';
+import { NuguSpinnerService } from '../services/spinner.service';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,8 @@ import { NuguAuthenticationService } from '../services/authentication.service';
 export class NuguAuthGuardService {
   constructor(
     private authenticationService: NuguAuthenticationService,
-    private router: Router
+    private router: Router,
+    private _spinnerService: NuguSpinnerService
   ) {}
 
   canActivate(
@@ -27,6 +29,7 @@ export class NuguAuthGuardService {
     | UrlTree
     | Promise<boolean | UrlTree>
     | Observable<boolean | UrlTree> {
+    this._spinnerService.spinning(true);
     return this.authenticationService.user$.pipe(
       take(1),
       map((user) => {
@@ -34,14 +37,9 @@ export class NuguAuthGuardService {
         if (isAuth) {
           return true;
         }
+        this._spinnerService.spinning(false);
         return this.router.createUrlTree(['/auth']);
       })
     );
-    // tap(isAuth => {
-    //   if (!isAuth) {
-    //     this.router.navigate(['/auth']);
-    //   }
-    // })
-    // );
   }
 }

@@ -1,6 +1,8 @@
+$nav-bar-height: 3.5rem;
+
 .navigator {
   background-color: #EFF5F5;
-  height: 3.5rem;
+  height: $nav-bar-height;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -38,6 +40,19 @@
 }
 
 .main {
-  margin-block-start: 3.5rem;
-  height: calc(100vh - 3.5rem);
+  margin-block-start: $nav-bar-height;
+  height: calc(100vh - $nav-bar-height);
+
+  .overlay {
+    height: 100%;
+    position: absolute;
+    top: $nav-bar-height;
+    background-color: #F2F2F2;
+    opacity: 0.7;
+    z-index: 998;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }

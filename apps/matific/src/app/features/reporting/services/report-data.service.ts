@@ -1,11 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+
+import { tap } from 'rxjs';
+
+import { environment } from '@matific-env/environment';
 import {
   IActivityResponse,
   IClass,
 } from '@matific/core/interfaces/common.interfaces';
-import { environment } from 'apps/matific/src/environments/environment';
-import { tap } from 'rxjs';
 import { NuguActivitiesService } from './activities.service';
 import { NuguClassService } from './class.service';
 

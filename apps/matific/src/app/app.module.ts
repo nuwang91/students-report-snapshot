@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { NuguAppRoutingModule } from './app-routing.module';
 import { NuguAuthenticationModule } from './core/components/authentication/authentication.module';
 import { NuguReportPageModule } from './features/reporting/pages/report-page/report-page.module';
+import { NuguSpinnerModule } from './shared/components/spinner/spinner.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,7 +20,8 @@ import { NuguReportPageModule } from './features/reporting/pages/report-page/rep
     NuguAppRoutingModule,
     NuguAuthenticationModule,
     ButtonModule,
-    NuguReportPageModule
+    NuguReportPageModule,
+    NuguSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent],
