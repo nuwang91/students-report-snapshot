@@ -140,8 +140,7 @@ export class NuguReportPageComponent {
           };
           return modifiedActivity;
         })
-      ),
-      tap((value) => console.log(value))
+      )
     );
 
     this._progress$ = this._filteredActivities$.pipe(

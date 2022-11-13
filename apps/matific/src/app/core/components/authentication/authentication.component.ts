@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 import {
   AuthResponseData,
@@ -16,7 +16,10 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NuguAuthenticationComponent {
-  _isLoginMode = true;
+  _isLoginMode: boolean = true;
+
+  private _error: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  _errorMessage: Observable<string> = this._error;
 
   _userForm: FormGroup = new FormGroup({
     user: new FormControl('', [Validators.required, Validators.email]),
@@ -53,11 +56,10 @@ export class NuguAuthenticationComponent {
 
     authObs.subscribe({
       next: (resData) => {
-        console.log(resData);
         this.router.navigate(['/report']);
       },
       error: (errorMessage) => {
-        console.log(errorMessage);
+        this._error.next(errorMessage);
       },
     });
 
