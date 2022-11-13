@@ -15,8 +15,8 @@ export const Colors: Record<string, string> = {
 export interface IBarDataSet {
   labels: string[];
   datasets: {
-    backgroundColor: string[],
-    data: number[]
+    backgroundColor: string[];
+    data: number[];
   }[];
 }
 
@@ -74,9 +74,9 @@ export class NuguStatusBarTransformService {
       datasets: [
         {
           backgroundColor: [],
-          data: []
-        }
-      ]
+          data: [],
+        },
+      ],
     };
 
     data.datasets[0].backgroundColor = bars.map((bar) => bar.color);

@@ -24,8 +24,8 @@ export class NuguDataResolverService
   ): Observable<[IActivityResponse, IClass[]]> {
     this._spinnerService.spinning(true);
     return zip(
-      this._reportDataService.fetchActivities(),
-      this._reportDataService.fetchClasses()
+      this._reportDataService.fetchActivities$(),
+      this._reportDataService.fetchClasses$()
     ).pipe(tap(() => this._spinnerService.spinning(false)));
   }
 }

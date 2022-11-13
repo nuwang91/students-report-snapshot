@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
+
+import { map, Observable, of, switchMap } from 'rxjs';
+
 import {
   IActivity,
   IFullActivity,
 } from '@matific/core/interfaces/common.interfaces';
 import { NuguCommon } from '@matific/core/utils/common.library';
-import { map, Observable, of, switchMap } from 'rxjs';
 import { NuguActivitiesService } from './activities.service';
 import { NuguClassService } from './class.service';
 

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
 import { environment } from '@matific-env/environment';
 import {
@@ -26,7 +26,7 @@ export class NuguReportDataService {
     private _activitiesService: NuguActivitiesService
   ) {}
 
-  fetchClasses() {
+  fetchClasses$(): Observable<IClass[]> {
     return this._http
       .get<IClass[]>(
         `${this.API_URL}${NuguReportDataService.Classes_End_Point}`
@@ -38,7 +38,7 @@ export class NuguReportDataService {
       );
   }
 
-  fetchActivities() {
+  fetchActivities$(): Observable<IActivityResponse> {
     return this._http
       .get<IActivityResponse>(NuguReportDataService.Activities_End_Point)
       .pipe(
