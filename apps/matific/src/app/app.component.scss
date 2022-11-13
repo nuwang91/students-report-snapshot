@@ -42,6 +42,7 @@ $nav-bar-height: 3.5rem;
 .main {
   margin-block-start: $nav-bar-height;
   height: calc(100vh - $nav-bar-height);
+  overflow: hidden;
 
   .overlay {
     height: 100%;

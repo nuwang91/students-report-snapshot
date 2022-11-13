@@ -1,63 +1,72 @@
-<h1 class="heading">Reporting - Student Snapshot</h1>
+<div class="wrapper">
+  <h1 class="heading">Reporting - Student Snapshot</h1>
 
-<div class="container">
-  <div class="input-row">
-    <div class="input-conatiner">
-      <label for="id-class">Class</label>
-      <nugu-dropdown
-        [id]="'id-class'"
-        [options]="(_classes$ | async) ?? []"
-        [optionName]="'name'"
-        [placeholder]="'Select a Class'"
-        (valueChange)="_classChanged($event)"
-      ></nugu-dropdown>
-    </div>
-    <div class="input-conatiner">
-      <label for="id-student">Student</label>
-      <nugu-dropdown
-        [id]="'id-student'"
-        [options]="(_students$ | async) ?? []"
-        [placeholder]="'Select a Student'"
-        (valueChange)="_studentChanged($event)"
-      ></nugu-dropdown>
-    </div>
-    <div class="date-range-container">
+  <div class="container">
+    <div class="input-row">
       <div class="input-conatiner">
-        <label for="id-date-range">Date Range</label>
-        <div class="date-range-fields">
-          <nugu-date-picker
-            [id]="'id-date-range'"
-            [showIcon]="true"
-            (valueChanged)="_fromDateChanged($event)"
-          ></nugu-date-picker>
-          <span>to</span>
-          <nugu-date-picker
-            [showIcon]="true"
-            (valueChanged)="_toDateChanged($event)"
-          ></nugu-date-picker>
+        <label for="id-class">Class</label>
+        <nugu-dropdown
+          [id]="'id-class'"
+          [options]="(_classes$ | async) ?? []"
+          [optionName]="'name'"
+          [placeholder]="'Select a Class'"
+          (valueChange)="_classChanged($event)"
+        ></nugu-dropdown>
+      </div>
+      <div class="input-conatiner">
+        <label for="id-student">Student</label>
+        <nugu-dropdown
+          [id]="'id-student'"
+          [options]="(_students$ | async) ?? []"
+          [placeholder]="'Select a Student'"
+          (valueChange)="_studentChanged($event)"
+        ></nugu-dropdown>
+      </div>
+      <div class="date-range-container">
+        <div class="input-conatiner">
+          <label for="id-date-range">Date Range</label>
+          <div class="date-range-fields">
+            <nugu-date-picker
+              [id]="'id-date-range'"
+              [showIcon]="true"
+              (valueChanged)="_fromDateChanged($event)"
+            ></nugu-date-picker>
+            <span>to</span>
+            <nugu-date-picker
+              [showIcon]="true"
+              (valueChanged)="_toDateChanged($event)"
+            ></nugu-date-picker>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="info">
-    <span>overall results for the period:</span>
-    <span class="selectd-date-range">{{ _selectedDateRange$ | async }}</span>
-  </div>
+    <div class="info">
+      <span>overall results for the period:</span>
+      <span class="selectd-date-range">{{ _selectedDateRange$ | async }}</span>
+    </div>
 
-  <div class="progress-container">
-    <nugu-status-bar [values]="(_progress$ | async) ?? []"></nugu-status-bar>
-  </div>
+    <div class="progress-container">
+      <nugu-status-bar [values]="(_progress$ | async) ?? []"></nugu-status-bar>
+    </div>
 
-  <div *ngIf="_chartIsVisible$ | async" class="chart-container">
-    <p-chart type="bar" [data]="_chartData$ | async" [options]="_chartOptions"></p-chart>
-  </div>
+    <div *ngIf="_chartIsVisible$ | async" class="chart-container">
+      <p-chart
+        type="bar"
+        [data]="_chartData$ | async"
+        [options]="_chartOptions"
+      ></p-chart>
+    </div>
 
-  <nugu-reporting-table
-    [dataSource]="(_activities$ | async) ?? []"
-    [columns]="_columns"
-    [studentSelectedWithRange]="(_hasNotSelectedStudentAndRange | async) ?? false"
-    [noDataMessageForStudent]="(_noDataForStudent$ | async) ?? ''"
-    [trackBy]="_trackBy">
-  </nugu-reporting-table>
+    <nugu-reporting-table
+      [dataSource]="(_activities$ | async) ?? []"
+      [columns]="_columns"
+      [studentSelectedWithRange]="
+        (_hasNotSelectedStudentAndRange | async) ?? false
+      "
+      [noDataMessageForStudent]="(_noDataForStudent$ | async) ?? ''"
+      [trackBy]="_trackBy"
+    >
+    </nugu-reporting-table>
+  </div>
 </div>
