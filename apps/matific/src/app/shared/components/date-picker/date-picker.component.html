@@ -1,9 +1,9 @@
 <p-calendar
   [inputId]="id"
   [(ngModel)]="value"
-  dateFormat="dd-mm-yy"
+  [dateFormat]="dateFormat"
   [showIcon]="showIcon"
-  [showButtonBar]="true"
+  [showButtonBar]="showButtonBar"
   (onSelect)="onSelect($event)"
   (onClose)="onClose()"
 ></p-calendar>

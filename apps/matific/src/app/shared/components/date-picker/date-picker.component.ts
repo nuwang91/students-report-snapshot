@@ -22,6 +22,12 @@ export class NuguDatePickerComponent {
   @Input()
   showIcon: boolean = false;
 
+  @Input()
+  showButtonBar: boolean = true;
+
+  @Input()
+  dateFormat: string = 'dd-mm-yy';
+
   @Output()
   readonly valueSelected: EventEmitter<any> = new EventEmitter<any>();
 
