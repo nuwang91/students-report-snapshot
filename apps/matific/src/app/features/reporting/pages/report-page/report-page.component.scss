@@ -2,11 +2,20 @@
 
 .heading {
   font-weight: normal;
+
+  @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    text-align: center;
+  }
 }
 
 .input-row {
   display: flex;
   justify-content: space-evenly;
+
+  @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    flex-direction: column;
+    justify-content: center;
+  }
 }
 
 .input-conatiner {
@@ -23,6 +32,17 @@
 
   nugu-date-picker:last-of-type {
     margin-inline-start: 1rem;
+  }
+
+  @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+
+    .date-range-fields{
+      display: flex;
+    }
+
+    span {
+      align-self: center;
+    }
   }
 }
 
