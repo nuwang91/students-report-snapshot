@@ -18,7 +18,6 @@ import {
 } from '@matific/core/interfaces/common.interfaces';
 import { NuguCommon } from '@matific/core/utils/common.library';
 import { IProgressBar } from '@matific/shared/components/progress-bar/progress-bar.component';
-import { NuguTableColumnInterface } from '@matific/shared/components/table/table.component';
 import { NuguActivitiesFilterService } from '../../services/activities-filter.service';
 import { NuguClassService } from '../../services/class.service';
 import { NuguReportDataService } from '../../services/report-data.service';
@@ -26,6 +25,11 @@ import {
   IBarDataSet,
   NuguStatusBarTransformService,
 } from '../../services/status-bar-transform.service';
+
+interface NuguTableColumnInterface {
+  name: string;
+  title?: string;
+}
 
 export const columns: NuguTableColumnInterface[] = [
   {

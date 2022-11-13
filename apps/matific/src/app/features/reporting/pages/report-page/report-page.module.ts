@@ -7,8 +7,6 @@ import { ChartModule } from 'primeng/chart';
 import { NuguReportPageComponent } from './report-page.component';
 import { NuguDropdownModule } from '@matific/shared/components/dropdown/dropdown.module';
 import { NuguDatePickerModule } from '@matific/shared/components/date-picker/date-picker.module';
-import { NuguTableModule } from '@matific/shared/components/table/table.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NuguStatusBarModule } from '../../components/status-bar/status-bar.module';
 import { NuguResultColorDirective } from '../../directives/result-color.directive';
 
@@ -18,8 +16,6 @@ import { NuguResultColorDirective } from '../../directives/result-color.directiv
     CommonModule,
     NuguDropdownModule,
     NuguDatePickerModule,
-    NuguTableModule,
-    ReactiveFormsModule,
     NuguStatusBarModule,
     TableModule,
     ChartModule
