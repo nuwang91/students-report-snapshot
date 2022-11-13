@@ -28,6 +28,9 @@ export class NuguDropdownComponent {
   @Input()
   optionName: string = '';
 
+  @Input()
+  showClear: boolean = true;
+
   @Output()
   readonly valueChange: EventEmitter<any> = new EventEmitter<any>();
 
