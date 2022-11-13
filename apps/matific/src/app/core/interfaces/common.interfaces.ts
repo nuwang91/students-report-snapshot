@@ -22,7 +22,6 @@ export interface IActivity {
 export interface IFullActivity extends IActivity {
   result: number,
   date: string,
-  color?: string
 }
 
 export interface IActivityResponse {
