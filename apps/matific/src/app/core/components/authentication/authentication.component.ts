@@ -34,11 +34,11 @@ export class NuguAuthenticationComponent {
     private router: Router
   ) {}
 
-  _onSwitchMode() {
+  _onSwitchMode(): void {
     this._isLoginMode = !this._isLoginMode;
   }
 
-  _login() {
+  _login(): void {
     if (!this._userForm.valid) {
       return;
     }

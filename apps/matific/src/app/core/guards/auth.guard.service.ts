@@ -17,7 +17,7 @@ import { NuguSpinnerService } from '../services/spinner.service';
 export class NuguAuthGuardService {
   constructor(
     private _authenticationService: NuguAuthenticationService,
-    private router: Router,
+    private _router: Router,
     private _spinnerService: NuguSpinnerService
   ) {}
 
@@ -38,7 +38,7 @@ export class NuguAuthGuardService {
           return true;
         }
         this._spinnerService.spinning(false);
-        return this.router.createUrlTree(['/auth']);
+        return this._router.createUrlTree(['/auth']);
       })
     );
   }
