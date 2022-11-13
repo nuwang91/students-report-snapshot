@@ -5,6 +5,24 @@
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
+  z-index: 999;
+
+  position: fixed;
+  width: 100%;
+  top: 0;
+
+  box-shadow: 0 2px 8px 0 rgb(36 58 62 / 12%), 0 2px 24px 0 rgb(36 58 62 / 12%);
+
+  .logo {
+    margin-inline-start: 1rem;
+    width: 100px;
+    height: inherit;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-image: url('../assets/images/matific.svg');
+  }
+
+
 
   button {
     margin-inline-start: auto;
@@ -12,13 +30,14 @@
 
     @media (hover: hover) and (pointer: fine) {
       &:hover {
-          background-color: #EB6440;
-          color: #D6E4E5;
+        background-color: #EB6440;
+        color: #D6E4E5;
       }
-  }
+    }
   }
 }
 
 .main {
+  margin-block-start: 3.5rem;
   height: calc(100vh - 3.5rem);
 }
