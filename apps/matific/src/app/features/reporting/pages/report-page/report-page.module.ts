@@ -1,25 +1,24 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { TableModule } from 'primeng/table';
 import { ChartModule } from 'primeng/chart';
 
 import { NuguReportPageComponent } from './report-page.component';
 import { NuguDropdownModule } from '@matific/shared/components/dropdown/dropdown.module';
 import { NuguDatePickerModule } from '@matific/shared/components/date-picker/date-picker.module';
 import { NuguStatusBarModule } from '../../components/status-bar/status-bar.module';
-import { NuguResultColorDirective } from '../../directives/result-color.directive';
+import { NuguReportingTableModule } from '../../components/reporting-table/reporting-table.module';
 
 @NgModule({
-  declarations: [NuguReportPageComponent, NuguResultColorDirective],
+  declarations: [NuguReportPageComponent],
   imports: [
     CommonModule,
     NuguDropdownModule,
     NuguDatePickerModule,
     NuguStatusBarModule,
-    TableModule,
-    ChartModule
+    ChartModule,
+    NuguReportingTableModule,
   ],
-  exports: [NuguReportPageComponent]
+  exports: [NuguReportPageComponent],
 })
-export class NuguReportPageModule { }
+export class NuguReportPageModule {}

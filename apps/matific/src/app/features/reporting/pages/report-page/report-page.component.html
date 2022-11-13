@@ -51,48 +51,11 @@
 
   <p-chart *ngIf="_chartIsVisible$ | async" type="bar" [data]="_chartData$ | async" [options]="_chartOptions"></p-chart>
 
-  <p-table
-    [value]="(_activities$ | async) ?? []"
-    [rowTrackBy]="_trackBy"
-    >
-    <ng-template pTemplate="header">
-      <tr>
-        <th *ngFor="let column of _columns" [pSortableColumn]="column.name" >
-          {{ column.title }}
-          <p-sortIcon [field]="column.name"></p-sortIcon>
-        </th>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-row>
-      <tr>
-        <td *ngFor="let column of _columns">
-          <ng-container *ngIf="column.name === 'result'; else elseTemplate">
-            <span [nuguResultColor]="row[column.name]">{{
-              row[column.name]
-            }}</span>
-          </ng-container>
-          <ng-template #elseTemplate>
-            {{ row[column.name] }}
-          </ng-template>
-        </td>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="emptymessage">
-      <tr
-        *ngIf="
-          (_hasNotSelectedStudentAndRange | async) === false;
-          else elseTemplate
-        "
-      >
-        <td [attr.colspan]="_columns.length">no data</td>
-      </tr>
-      <ng-template #elseTemplate>
-        <tr>
-          <td [attr.colspan]="_columns.length">
-            {{ _noDataForStudent$ | async }}
-          </td>
-        </tr>
-      </ng-template>
-    </ng-template>
-  </p-table>
+  <nugu-reporting-table
+    [dataSource]="(_activities$ | async) ?? []"
+    [columns]="_columns"
+    [studentSelectedWithRange]="(_hasNotSelectedStudentAndRange | async) ?? false"
+    [noDataMessageForStudent]="(_noDataForStudent$ | async) ?? ''"
+    [trackBy]="_trackBy">
+  </nugu-reporting-table>
 </div>

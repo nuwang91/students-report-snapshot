@@ -1,10 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import {
   combineLatest,
   map,
   Observable,
-  Subject,
   switchMap,
   tap,
   BehaviorSubject,
@@ -20,16 +19,11 @@ import { NuguCommon } from '@matific/core/utils/common.library';
 import { IProgressBar } from '@matific/shared/components/progress-bar/progress-bar.component';
 import { NuguActivitiesFilterService } from '../../services/activities-filter.service';
 import { NuguClassService } from '../../services/class.service';
-import { NuguReportDataService } from '../../services/report-data.service';
 import {
   IBarDataSet,
   NuguStatusBarTransformService,
 } from '../../services/status-bar-transform.service';
-
-interface NuguTableColumnInterface {
-  name: string;
-  title?: string;
-}
+import { NuguTableColumnInterface } from '../../components/reporting-table/reporting-table.component';
 
 export const columns: NuguTableColumnInterface[] = [
   {
@@ -64,18 +58,17 @@ export const columns: NuguTableColumnInterface[] = [
   styleUrls: ['./report-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NuguReportPageComponent implements OnDestroy {
+export class NuguReportPageComponent {
   _classes$: Observable<IClass[]>;
   _students$: Observable<string[] | undefined>;
-  _activities$: Observable<any>;
+  _activities$: Observable<any[]>;
   _filteredActivities$: Observable<IFullActivity[]>;
   _progress$: Observable<IProgressBar[]>;
-  _selectedDateRange$: Observable<string>; // '10 Sept - 10 Nov';
+  _selectedDateRange$: Observable<string>;
   _noDataForStudent$: Observable<string>;
   _hasNotSelectedStudentAndRange: Observable<boolean>;
   _chartData$: Observable<IBarDataSet>;
   _chartIsVisible$: Observable<boolean>;
-
 
   _columns: NuguTableColumnInterface[];
 
@@ -87,7 +80,6 @@ export class NuguReportPageComponent implements OnDestroy {
     }
 };
 
-  private _destroyed$: Subject<void> = new Subject();
   private _classChanged$: BehaviorSubject<string> = new BehaviorSubject<string>(
     ''
   );
@@ -98,35 +90,16 @@ export class NuguReportPageComponent implements OnDestroy {
   private _toDateChanged$: BehaviorSubject<Date | null> =
     new BehaviorSubject<Date | null>(null);
 
-  private _parametersDataChanged$: Observable<any>;
-
-  progress: IProgressBar[] = [
-    { color: '#F2F2F2', percentage: 16, status: 'unassigned' },
-    { color: '#D90404', percentage: 18, status: 'weak' },
-    { color: '#F26513', percentage: 35, status: 'ok' },
-    { color: '#ffc107', percentage: 4, status: 'good' },
-    { color: '#4CAF50', percentage: 27, status: 'excellent' },
-  ];
-
   constructor(
     private _classService: NuguClassService,
-    private _reportDataService: NuguReportDataService,
     private _activitiesFilterService: NuguActivitiesFilterService,
     private _statusBarTransformService: NuguStatusBarTransformService
   ) {
-    this._classes$ = this._classService.classesChanged$
-      .pipe
-      // takeUntil(this._destroyed$),
-      // tap((classes) => this._classChanged$.next(classes[0].name))
-      ();
+    this._classes$ = this._classService.classesChanged$;
 
     this._students$ = this._classChanged$.pipe(
-      // takeUntil(this._destroyed$),
       switchMap((name) => this._classService.getClass$(name)),
       map((value) => value?.students)
-      //,
-      // filter((students): students is string[] => !!students),
-      // tap((students) => this._studentChanged$.next(students[0]))
     );
 
     this._selectedDateRange$ = combineLatest([
@@ -147,7 +120,6 @@ export class NuguReportPageComponent implements OnDestroy {
       this._fromDateChanged$,
       this._toDateChanged$,
     ]).pipe(
-      // skip(1),
       switchMap(([className, studentName, fromDate, toDate]) => {
         return this._activitiesFilterService.filter$(
           className,
@@ -215,11 +187,6 @@ export class NuguReportPageComponent implements OnDestroy {
     )
 
     this._columns = columns;
-  }
-
-  ngOnDestroy(): void {
-    this._destroyed$.next();
-    this._destroyed$.complete();
   }
 
   _classChanged({ _, value }: { _: any; value: IClass }): void {
