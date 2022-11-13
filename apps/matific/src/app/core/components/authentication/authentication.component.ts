@@ -4,7 +4,10 @@ import { Router } from '@angular/router';
 
 import { Observable } from 'rxjs';
 
-import { AuthResponseData, NuguAuthenticationService } from '../../services/authentication.service';
+import {
+  AuthResponseData,
+  NuguAuthenticationService,
+} from '../../services/authentication.service';
 
 @Component({
   selector: 'nugu-auth',
@@ -13,9 +16,9 @@ import { AuthResponseData, NuguAuthenticationService } from '../../services/auth
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NuguAuthenticationComponent {
-  isLoginMode = true;
+  _isLoginMode = true;
 
-  userForm: FormGroup = new FormGroup({
+  _userForm: FormGroup = new FormGroup({
     user: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [
       Validators.required,
@@ -23,26 +26,26 @@ export class NuguAuthenticationComponent {
     ]),
   });
 
-  onSwitchMode() {
-    this.isLoginMode = !this.isLoginMode;
-  }
-
   constructor(
     private authenticationService: NuguAuthenticationService,
     private router: Router
   ) {}
 
-  login() {
-    if (!this.userForm.valid) {
+  _onSwitchMode() {
+    this._isLoginMode = !this._isLoginMode;
+  }
+
+  _login() {
+    if (!this._userForm.valid) {
       return;
     }
 
-    const email = this.userForm.value.user;
-    const password = this.userForm.value.password;
+    const email = this._userForm.value.user;
+    const password = this._userForm.value.password;
 
     let authObs: Observable<AuthResponseData>;
 
-    if (this.isLoginMode) {
+    if (this._isLoginMode) {
       authObs = this.authenticationService.login(email, password);
     } else {
       authObs = this.authenticationService.signup(email, password);
@@ -51,13 +54,13 @@ export class NuguAuthenticationComponent {
     authObs.subscribe({
       next: (resData) => {
         console.log(resData);
-        this.router.navigate(['/report'])
+        this.router.navigate(['/report']);
       },
       error: (errorMessage) => {
         console.log(errorMessage);
       },
     });
 
-    this.userForm.reset();
+    this._userForm.reset();
   }
 }

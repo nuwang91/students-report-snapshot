@@ -1,6 +1,6 @@
 <h1 class="heading">Login to Student Snapshot</h1>
 <div class="login-container">
-  <form [formGroup]="userForm" (ngSubmit)="login()">
+  <form [formGroup]="_userForm" (ngSubmit)="_login()">
     <div class="user-group">
       <label for="username">Username</label>
       <input
@@ -9,13 +9,13 @@
         aria-describedby="username-help"
         [ngClass]="{
           'ng-invalid':
-            userForm.get('user')?.touched && !userForm.get('user')?.valid
+          _userForm.get('user')?.touched && !_userForm.get('user')?.valid
         }"
         pInputText
         formControlName="user"
       />
       <small
-        *ngIf="userForm.get('user')?.touched && !userForm.get('user')?.valid"
+        *ngIf="_userForm.get('user')?.touched && !_userForm.get('user')?.valid"
         id="username-help"
         class="p-error"
         >Username is invalid.</small
@@ -30,15 +30,15 @@
         aria-describedby="password-help"
         [ngClass]="{
           'ng-invalid':
-            userForm.get('password')?.touched &&
-            !userForm.get('password')?.valid
+          _userForm.get('password')?.touched &&
+            !_userForm.get('password')?.valid
         }"
         pInputText
         formControlName="password"
       />
       <small
         *ngIf="
-          userForm.get('password')?.touched && !userForm.get('password')?.valid
+        _userForm.get('password')?.touched && !_userForm.get('password')?.valid
         "
         id="password-help"
         class="p-error"
@@ -50,13 +50,13 @@
       <p-button
         class="submit"
         type="submit"
-        [disabled]="!userForm.valid"
-        [label]="isLoginMode ? 'Login' : 'Sign Up'"
+        [disabled]="!_userForm.valid"
+        [label]="_isLoginMode ? 'Login' : 'Sign Up'"
       ></p-button>
       <p-button
         type="button"
-        [label]="'Switch to ' + (isLoginMode ? 'Sign Up' : 'Login')"
-        (onClick)="onSwitchMode()"
+        [label]="'Switch to ' + (_isLoginMode ? 'Sign Up' : 'Login')"
+        (onClick)="_onSwitchMode()"
       ></p-button>
     </div>
   </form>
