@@ -23,12 +23,6 @@ export class NuguActivitiesFilterService {
     fromDate: Date | null,
     toDate: Date | null
   ): Observable<IFullActivity[]> {
-    // if (!className) {
-    //   return this._activitiesService.activitiesChanged$.pipe(
-    //     map((activities) => this._transformToFullActivity(activities))
-    //   );
-    // }
-
     if (className && !studentName && !fromDate && !toDate) {
       return this._classService.getAllStudentsInClass$(className).pipe(
         switchMap((students) => {
@@ -48,12 +42,9 @@ export class NuguActivitiesFilterService {
               this._getActivitiesForStudents(activities, students)
             ),
             map((activities) => this._transformToFullActivity(activities)),
-            map((fullActivities) => {
-              return fullActivities.filter((activity) => {
-                const activityDate = NuguCommon.getDate(activity.date);
-                return activityDate >= fromDate;
-              });
-            })
+            map((fullActivities) =>
+              this._dateFilter(fullActivities, fromDate, toDate)
+            )
           );
         })
       );
@@ -65,12 +56,9 @@ export class NuguActivitiesFilterService {
               this._getActivitiesForStudents(activities, students)
             ),
             map((activities) => this._transformToFullActivity(activities)),
-            map((fullActivities) => {
-              return fullActivities.filter((activity) => {
-                const activityDate = NuguCommon.getDate(activity.date);
-                return activityDate <= toDate;
-              });
-            })
+            map((fullActivities) =>
+              this._dateFilter(fullActivities, fromDate, toDate)
+            )
           );
         })
       );
@@ -82,12 +70,9 @@ export class NuguActivitiesFilterService {
               this._getActivitiesForStudents(activities, students)
             ),
             map((activities) => this._transformToFullActivity(activities)),
-            map((fullActivities) => {
-              return fullActivities.filter((activity) => {
-                const activityDate = NuguCommon.getDate(activity.date);
-                return activityDate >= fromDate && activityDate <= toDate;
-              });
-            })
+            map((fullActivities) =>
+              this._dateFilter(fullActivities, fromDate, toDate)
+            )
           );
         })
       );
@@ -108,12 +93,9 @@ export class NuguActivitiesFilterService {
           );
         }),
         map((activities) => this._transformToFullActivity(activities)),
-        map((fullActivities) => {
-          return fullActivities.filter((activity) => {
-            const activityDate = NuguCommon.getDate(activity.date);
-            return activityDate >= fromDate;
-          });
-        })
+        map((fullActivities) =>
+          this._dateFilter(fullActivities, fromDate, toDate)
+        )
       );
     } else if (className && studentName && !fromDate && toDate) {
       return this._activitiesService.activitiesChanged$.pipe(
@@ -123,12 +105,9 @@ export class NuguActivitiesFilterService {
           );
         }),
         map((activities) => this._transformToFullActivity(activities)),
-        map((fullActivities) => {
-          return fullActivities.filter((activity) => {
-            const activityDate = NuguCommon.getDate(activity.date);
-            return activityDate <= toDate;
-          });
-        })
+        map((fullActivities) =>
+          this._dateFilter(fullActivities, fromDate, toDate)
+        )
       );
     } else if (className && studentName && fromDate && toDate) {
       return this._activitiesService.activitiesChanged$.pipe(
@@ -138,12 +117,9 @@ export class NuguActivitiesFilterService {
           );
         }),
         map((activities) => this._transformToFullActivity(activities)),
-        map((fullActivities) => {
-          return fullActivities.filter((activity) => {
-            const activityDate = NuguCommon.getDate(activity.date);
-            return activityDate >= fromDate && activityDate <= toDate;
-          });
-        })
+        map((fullActivities) =>
+          this._dateFilter(fullActivities, fromDate, toDate)
+        )
       );
     }
 
@@ -170,5 +146,25 @@ export class NuguActivitiesFilterService {
     students: string[]
   ): IActivity[] {
     return activities.filter((activity) => students.includes(activity.student));
+  }
+
+  private _dateFilter(
+    activities: IFullActivity[],
+    fromDate: Date | null,
+    toDate: Date | null
+  ): IFullActivity[] {
+    return activities.filter((activity) => {
+      const activityDate = NuguCommon.getDate(activity.date);
+      if (!!fromDate && !!toDate) {
+        return activityDate >= fromDate && activityDate <= toDate;
+      } else {
+        if (toDate) {
+          return activityDate <= toDate;
+        } else if (fromDate) {
+          return activityDate >= fromDate;
+        }
+      }
+      return [];
+    });
   }
 }
