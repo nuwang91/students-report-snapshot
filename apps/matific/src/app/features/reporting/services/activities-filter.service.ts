@@ -33,11 +33,7 @@ export class NuguActivitiesFilterService {
       return this._classService.getAllStudentsInClass$(className).pipe(
         switchMap((students) => {
           return this._activitiesService.activitiesChanged$.pipe(
-            map((activities) => {
-              return activities.filter((activity) =>
-                students.includes(activity.student)
-              );
-            }),
+            map((activities) => this._getActivitiesForStudents(activities, students)),
             map((activities) => this._transformToFullActivity(activities))
           );
         })
@@ -46,11 +42,7 @@ export class NuguActivitiesFilterService {
       return this._classService.getAllStudentsInClass$(className).pipe(
         switchMap((students) => {
           return this._activitiesService.activitiesChanged$.pipe(
-            map((activities) => {
-              return activities.filter((activity) =>
-                students.includes(activity.student)
-              );
-            }),
+            map((activities) => this._getActivitiesForStudents(activities, students)),
             map((activities) => this._transformToFullActivity(activities)),
             map((fullActivities) => {
               return fullActivities.filter((activity) => {
@@ -65,11 +57,7 @@ export class NuguActivitiesFilterService {
       return this._classService.getAllStudentsInClass$(className).pipe(
         switchMap((students) => {
           return this._activitiesService.activitiesChanged$.pipe(
-            map((activities) => {
-              return activities.filter((activity) =>
-                students.includes(activity.student)
-              );
-            }),
+            map((activities) => this._getActivitiesForStudents(activities, students)),
             map((activities) => this._transformToFullActivity(activities)),
             map((fullActivities) => {
               return fullActivities.filter((activity) => {
@@ -84,11 +72,7 @@ export class NuguActivitiesFilterService {
       return this._classService.getAllStudentsInClass$(className).pipe(
         switchMap((students) => {
           return this._activitiesService.activitiesChanged$.pipe(
-            map((activities) => {
-              return activities.filter((activity) =>
-                students.includes(activity.student)
-              );
-            }),
+            map((activities) => this._getActivitiesForStudents(activities, students)),
             map((activities) => this._transformToFullActivity(activities)),
             map((fullActivities) => {
               return fullActivities.filter((activity) => {
@@ -171,5 +155,12 @@ export class NuguActivitiesFilterService {
       }
     });
     return fullActivity;
+  }
+
+  private _getActivitiesForStudents(
+    activities: IActivity[],
+    students: string[]
+  ): IActivity[] {
+    return activities.filter((activity) => students.includes(activity.student));
   }
 }
