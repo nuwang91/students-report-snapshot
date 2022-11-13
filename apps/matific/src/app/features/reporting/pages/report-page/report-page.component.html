@@ -57,8 +57,9 @@
     >
     <ng-template pTemplate="header">
       <tr>
-        <th *ngFor="let column of _columns">
+        <th *ngFor="let column of _columns" [pSortableColumn]="column.name" >
           {{ column.title }}
+          <p-sortIcon [field]="column.name"></p-sortIcon>
         </th>
       </tr>
     </ng-template>
