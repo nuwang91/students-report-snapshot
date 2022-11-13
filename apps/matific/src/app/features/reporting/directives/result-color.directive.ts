@@ -16,6 +16,9 @@ export class NuguResultColorDirective implements OnChanges {
   @HostBinding('style.color')
   color: string;
 
+  @HostBinding('style.font-weight')
+  fontWeight: string;
+
   ngOnChanges(changes: SimpleChanges): void {
     if (
       !!changes['nuguResultColor'] &&
@@ -23,6 +26,7 @@ export class NuguResultColorDirective implements OnChanges {
     ) {
       const transformToNumber: number = +this.nuguResultColor.split('%')[0];
       this.color = this._getColor(transformToNumber);
+      this.fontWeight = 'bold'
     }
   }
 
