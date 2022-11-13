@@ -33,7 +33,9 @@ export class NuguActivitiesFilterService {
       return this._classService.getAllStudentsInClass$(className).pipe(
         switchMap((students) => {
           return this._activitiesService.activitiesChanged$.pipe(
-            map((activities) => this._getActivitiesForStudents(activities, students)),
+            map((activities) =>
+              this._getActivitiesForStudents(activities, students)
+            ),
             map((activities) => this._transformToFullActivity(activities))
           );
         })
@@ -42,7 +44,9 @@ export class NuguActivitiesFilterService {
       return this._classService.getAllStudentsInClass$(className).pipe(
         switchMap((students) => {
           return this._activitiesService.activitiesChanged$.pipe(
-            map((activities) => this._getActivitiesForStudents(activities, students)),
+            map((activities) =>
+              this._getActivitiesForStudents(activities, students)
+            ),
             map((activities) => this._transformToFullActivity(activities)),
             map((fullActivities) => {
               return fullActivities.filter((activity) => {
@@ -57,7 +61,9 @@ export class NuguActivitiesFilterService {
       return this._classService.getAllStudentsInClass$(className).pipe(
         switchMap((students) => {
           return this._activitiesService.activitiesChanged$.pipe(
-            map((activities) => this._getActivitiesForStudents(activities, students)),
+            map((activities) =>
+              this._getActivitiesForStudents(activities, students)
+            ),
             map((activities) => this._transformToFullActivity(activities)),
             map((fullActivities) => {
               return fullActivities.filter((activity) => {
@@ -72,7 +78,9 @@ export class NuguActivitiesFilterService {
       return this._classService.getAllStudentsInClass$(className).pipe(
         switchMap((students) => {
           return this._activitiesService.activitiesChanged$.pipe(
-            map((activities) => this._getActivitiesForStudents(activities, students)),
+            map((activities) =>
+              this._getActivitiesForStudents(activities, students)
+            ),
             map((activities) => this._transformToFullActivity(activities)),
             map((fullActivities) => {
               return fullActivities.filter((activity) => {
