@@ -1,12 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
-import {
-  IActivity,
-  IClass,
-  IFullActivity,
-} from '@matific/core/interfaces/common.interfaces';
-import { NuguCommon } from '@matific/core/utils/common.library';
-import { IProgressBar } from '@matific/shared/components/progress-bar/progress-bar.component';
-import { NuguTableColumnInterface } from '@matific/shared/components/table/table.component';
+
 import {
   combineLatest,
   map,
@@ -16,11 +9,19 @@ import {
   tap,
   BehaviorSubject,
   filter,
-  skip,
 } from 'rxjs';
+
+import {
+  IClass,
+  IFullActivity,
+} from '@matific/core/interfaces/common.interfaces';
+import { NuguCommon } from '@matific/core/utils/common.library';
+import { IProgressBar } from '@matific/shared/components/progress-bar/progress-bar.component';
+import { NuguTableColumnInterface } from '@matific/shared/components/table/table.component';
 import { NuguActivitiesFilterService } from '../../services/activities-filter.service';
 import { NuguClassService } from '../../services/class.service';
 import { NuguReportDataService } from '../../services/report-data.service';
+import { NuguStatusBarTransformService } from '../../services/status-bar-transform.service';
 
 export const columns: NuguTableColumnInterface[] = [
   {
@@ -59,7 +60,11 @@ export class NuguReportPageComponent implements OnDestroy {
   _classes$: Observable<IClass[]>;
   _students$: Observable<string[] | undefined>;
   _activities$: Observable<any>;
+  _filteredActivities$: Observable<IFullActivity[]>;
+  _progress$: Observable<IProgressBar[]>;
   _selectedDateRange$: Observable<string>; // '10 Sept - 10 Nov';
+  _noDataForStudent$: Observable<string>;
+  _hasNotSelectedStudentAndRange: Observable<boolean>;
 
   _columns: NuguTableColumnInterface[];
 
@@ -87,7 +92,8 @@ export class NuguReportPageComponent implements OnDestroy {
   constructor(
     private _classService: NuguClassService,
     private _reportDataService: NuguReportDataService,
-    private _activitiesFilterService: NuguActivitiesFilterService
+    private _activitiesFilterService: NuguActivitiesFilterService,
+    private _statusBarTransformService: NuguStatusBarTransformService
   ) {
     this._reportDataService.fetchClasses().subscribe();
     this._reportDataService.fetchActivities().subscribe();
@@ -118,13 +124,13 @@ export class NuguReportPageComponent implements OnDestroy {
       })
     );
 
-    this._activities$ = combineLatest([
+    this._filteredActivities$ = combineLatest([
       this._classChanged$,
       this._studentChanged$,
       this._fromDateChanged$,
       this._toDateChanged$,
     ]).pipe(
-      skip(1),
+      // skip(1),
       switchMap(([className, studentName, fromDate, toDate]) => {
         return this._activitiesFilterService.filter$(
           className,
@@ -132,31 +138,50 @@ export class NuguReportPageComponent implements OnDestroy {
           fromDate,
           toDate
         );
-      }),
-      map((fullActivities) =>
-        fullActivities.map((fullActivity) => {
-          return {
-            ...fullActivity,
-            date: NuguCommon.getDateWithShortMonth(fullActivity.date),
-            result: fullActivity.result + '%',
+      })
+    );
+
+    this._activities$ = this._filteredActivities$.pipe(
+      map((filteredActivities) =>
+        filteredActivities.map((filteredActivity) => {
+          const modifiedActivity = {
+            ...filteredActivity,
+            date: NuguCommon.getDateWithShortMonth(filteredActivity.date),
+            result: filteredActivity.result + '%',
           };
+          return modifiedActivity;
         })
       ),
       tap((value) => console.log(value))
     );
 
-    // combineLatest([
-    //   this._classChanged$,
-    //   this._studentChanged$,
-    //   this._fromDateChanged$,
-    //   this._toDateChanged$,
-    // ]).pipe(
-    //   skip(1),
-    //   switchMap(([className, studentName, fromDate, toDate]) => {
-    //     return this._activitiesFilterService.filter$(className);
-    //   }),
-    //   tap((value) => console.log(value))
-    // ).subscribe();
+    this._progress$ = this._filteredActivities$.pipe(
+      switchMap((filteredActivities) => {
+        return this._statusBarTransformService.statusTransform$(
+          filteredActivities
+        );
+      })
+    );
+
+    this._noDataForStudent$ = this._filteredActivities$.pipe(
+      filter((filteredActivities) => filteredActivities.length === 0),
+      map(
+        () =>
+          `No content has been completed by ${this._studentChanged$.getValue()} for ${NuguCommon.tranformDate(
+            this._fromDateChanged$.getValue() as Date
+          )} to ${NuguCommon.tranformDate(
+            this._toDateChanged$.getValue() as Date
+          )}`
+      )
+    );
+
+    this._hasNotSelectedStudentAndRange = combineLatest([
+      this._studentChanged$,
+      this._fromDateChanged$,
+      this._toDateChanged$,
+    ]).pipe(
+      map(([student, fromDate, toDate]) => !!student && !!fromDate && !!toDate)
+    );
 
     this._columns = columns;
   }

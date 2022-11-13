@@ -46,11 +46,15 @@
   </div>
 
   <div class="progress-container">
-    <nugu-status-bar [values]="progress"></nugu-status-bar>
+    <nugu-status-bar [values]="(_progress$ | async) ?? []"></nugu-status-bar>
   </div>
 
   <!-- <nugu-table [dataSource]="(_activities$ | async) ?? []" [columns]="_columns"></nugu-table> -->
-  <p-table [value]="(_activities$ | async) ?? []" [scrollable]="true" scrollHeight="400px">
+  <p-table
+    [value]="(_activities$ | async) ?? []"
+    [scrollable]="true"
+    scrollHeight="400px"
+  >
     <ng-template pTemplate="header">
       <tr>
         <th *ngFor="let column of _columns">
@@ -61,14 +65,33 @@
     <ng-template pTemplate="body" let-row>
       <tr>
         <td *ngFor="let column of _columns">
-          <ng-container *ngIf="column.name === 'result';else elseTemplate">
-            <span [nuguResultColor]="row[column.name]">{{ row[column.name] }}</span>
+          <ng-container *ngIf="column.name === 'result'; else elseTemplate">
+            <span [nuguResultColor]="row[column.name]">{{
+              row[column.name]
+            }}</span>
           </ng-container>
           <ng-template #elseTemplate>
             {{ row[column.name] }}
           </ng-template>
         </td>
       </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr
+        *ngIf="
+          (_hasNotSelectedStudentAndRange | async) === false;
+          else elseTemplate
+        "
+      >
+        <td [attr.colspan]="_columns.length">no data</td>
+      </tr>
+      <ng-template #elseTemplate>
+        <tr>
+          <td [attr.colspan]="_columns.length">
+            {{ _noDataForStudent$ | async }}
+          </td>
+        </tr>
+      </ng-template>
     </ng-template>
   </p-table>
 </div>
