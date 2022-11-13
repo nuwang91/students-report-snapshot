@@ -74,12 +74,19 @@ export class NuguAuthenticationService {
   }
 
   autoLogin(): void {
+    const storedUser = localStorage.getItem('userData');
+
+    if(!storedUser){
+      return;
+    }
+
     const userData: {
       email: string;
       id: string;
       _token: string;
       _tokenExpirationDate: string;
-    } = JSON.parse(localStorage.getItem('userData') ?? '');
+    } = JSON.parse(storedUser);
+
     if (!userData) {
       return;
     }
