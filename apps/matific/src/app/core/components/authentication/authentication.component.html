@@ -9,7 +9,7 @@
         aria-describedby="username-help"
         [ngClass]="{
           'ng-invalid':
-          _userForm.get('user')?.touched && !_userForm.get('user')?.valid
+            _userForm.get('user')?.touched && !_userForm.get('user')?.valid
         }"
         pInputText
         formControlName="user"
@@ -30,7 +30,7 @@
         aria-describedby="password-help"
         [ngClass]="{
           'ng-invalid':
-          _userForm.get('password')?.touched &&
+            _userForm.get('password')?.touched &&
             !_userForm.get('password')?.valid
         }"
         pInputText
@@ -38,7 +38,8 @@
       />
       <small
         *ngIf="
-        _userForm.get('password')?.touched && !_userForm.get('password')?.valid
+          _userForm.get('password')?.touched &&
+          !_userForm.get('password')?.valid
         "
         id="password-help"
         class="p-error"

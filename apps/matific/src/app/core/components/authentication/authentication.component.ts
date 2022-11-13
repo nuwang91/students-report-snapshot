@@ -27,7 +27,7 @@ export class NuguAuthenticationComponent {
   });
 
   constructor(
-    private authenticationService: NuguAuthenticationService,
+    private _authenticationService: NuguAuthenticationService,
     private router: Router
   ) {}
 
@@ -46,9 +46,9 @@ export class NuguAuthenticationComponent {
     let authObs: Observable<AuthResponseData>;
 
     if (this._isLoginMode) {
-      authObs = this.authenticationService.login(email, password);
+      authObs = this._authenticationService.login(email, password);
     } else {
-      authObs = this.authenticationService.signup(email, password);
+      authObs = this._authenticationService.signup(email, password);
     }
 
     authObs.subscribe({
