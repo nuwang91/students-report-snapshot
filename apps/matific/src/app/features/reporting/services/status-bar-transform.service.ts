@@ -12,10 +12,19 @@ const Colors: Record<string, string> = {
   Excellent: '#4CAF50',
 };
 
+export interface IBarDataSet {
+  labels: string[];
+  datasets: {
+    backgroundColor: string[],
+    data: number[]
+  }[];
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class NuguStatusBarTransformService {
+
   statusTransform$(activities: IFullActivity[]): Observable<IProgressBar[]> {
     if (activities.length === 0) {
       return of([]);
@@ -47,7 +56,7 @@ export class NuguStatusBarTransformService {
     });
 
     categories.forEach((v, k) => {
-      if(v){
+      if (v) {
         progressTransformedData.push({
           status: k,
           percentage: +((v / totalActivities) * 100).toFixed(2),
@@ -57,5 +66,22 @@ export class NuguStatusBarTransformService {
     });
 
     return of(progressTransformedData);
+  }
+
+  getBarChartDataset$(bars: IProgressBar[]): Observable<IBarDataSet> {
+    const data: IBarDataSet = {
+      labels: ['Weak', 'Ok', 'Good', 'Excellent'],
+      datasets: [
+        {
+          backgroundColor: [],
+          data: []
+        }
+      ]
+    };
+
+    data.datasets[0].backgroundColor = bars.map((bar) => bar.color);
+    data.datasets[0].data = bars.map((bar) => bar.percentage);
+
+    return of(data);
   }
 }

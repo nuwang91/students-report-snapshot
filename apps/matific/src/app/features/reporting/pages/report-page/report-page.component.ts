@@ -9,6 +9,7 @@ import {
   tap,
   BehaviorSubject,
   filter,
+  of,
 } from 'rxjs';
 
 import {
@@ -21,7 +22,10 @@ import { NuguTableColumnInterface } from '@matific/shared/components/table/table
 import { NuguActivitiesFilterService } from '../../services/activities-filter.service';
 import { NuguClassService } from '../../services/class.service';
 import { NuguReportDataService } from '../../services/report-data.service';
-import { NuguStatusBarTransformService } from '../../services/status-bar-transform.service';
+import {
+  IBarDataSet,
+  NuguStatusBarTransformService,
+} from '../../services/status-bar-transform.service';
 
 export const columns: NuguTableColumnInterface[] = [
   {
@@ -65,8 +69,19 @@ export class NuguReportPageComponent implements OnDestroy {
   _selectedDateRange$: Observable<string>; // '10 Sept - 10 Nov';
   _noDataForStudent$: Observable<string>;
   _hasNotSelectedStudentAndRange: Observable<boolean>;
+  _chartData$: Observable<IBarDataSet>;
+  _chartIsVisible$: Observable<boolean>;
+
 
   _columns: NuguTableColumnInterface[];
+
+  _chartOptions = {
+    plugins: {
+        legend: {
+            display: false,
+        }
+    }
+};
 
   private _destroyed$: Subject<void> = new Subject();
   private _classChanged$: BehaviorSubject<string> = new BehaviorSubject<string>(
@@ -183,6 +198,20 @@ export class NuguReportPageComponent implements OnDestroy {
       map(([student, fromDate, toDate]) => !!student && !!fromDate && !!toDate)
     );
 
+    this._chartData$ = this._progress$.pipe(
+      switchMap((bars) => {
+        return this._statusBarTransformService.getBarChartDataset$(bars);
+      })
+    );
+
+    this._chartIsVisible$ = combineLatest([
+      this._classChanged$,
+      this._studentChanged$,
+      this._chartData$
+    ]).pipe(
+      switchMap(([_class, student, data]) => of(!!_class && !student && !!data.datasets[0].data.length))
+    )
+
     this._columns = columns;
   }
 
@@ -210,4 +239,8 @@ export class NuguReportPageComponent implements OnDestroy {
   _toDateChanged(event: Date | null) {
     this._toDateChanged$.next(event);
   }
+
+  _trackBy: (index: number, item: any) => any = (index: number, item: any) => {
+    return item.id;
+  };
 }

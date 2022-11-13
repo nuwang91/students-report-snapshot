@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { TableModule } from 'primeng/table';
+import { ChartModule } from 'primeng/chart';
 
 import { NuguReportPageComponent } from './report-page.component';
 import { NuguDropdownModule } from '@matific/shared/components/dropdown/dropdown.module';
@@ -20,7 +21,8 @@ import { NuguResultColorDirective } from '../../directives/result-color.directiv
     NuguTableModule,
     ReactiveFormsModule,
     NuguStatusBarModule,
-    TableModule
+    TableModule,
+    ChartModule
   ],
   exports: [NuguReportPageComponent]
 })

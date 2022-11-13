@@ -49,12 +49,12 @@
     <nugu-status-bar [values]="(_progress$ | async) ?? []"></nugu-status-bar>
   </div>
 
-  <!-- <nugu-table [dataSource]="(_activities$ | async) ?? []" [columns]="_columns"></nugu-table> -->
+  <p-chart *ngIf="_chartIsVisible$ | async" type="bar" [data]="_chartData$ | async" [options]="_chartOptions"></p-chart>
+
   <p-table
     [value]="(_activities$ | async) ?? []"
-    [scrollable]="true"
-    scrollHeight="400px"
-  >
+    [rowTrackBy]="_trackBy"
+    >
     <ng-template pTemplate="header">
       <tr>
         <th *ngFor="let column of _columns">
