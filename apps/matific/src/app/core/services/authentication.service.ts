@@ -75,7 +75,6 @@ export class NuguAuthenticationService {
 
   autoLogin(): void {
     const storedUser = localStorage.getItem('userData');
-
     if(!storedUser){
       return;
     }

@@ -114,8 +114,6 @@ export class NuguReportPageComponent implements OnDestroy {
     private _activitiesFilterService: NuguActivitiesFilterService,
     private _statusBarTransformService: NuguStatusBarTransformService
   ) {
-    this._reportDataService.fetchClasses().subscribe();
-    this._reportDataService.fetchActivities().subscribe();
     this._classes$ = this._classService.classesChanged$
       .pipe
       // takeUntil(this._destroyed$),

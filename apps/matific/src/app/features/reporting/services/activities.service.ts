@@ -14,7 +14,6 @@ export class NuguActivitiesService {
 
   setActivities(activities: IActivity[]): void {
     this._activities = activities;
-    console.log(this._activities);
     this._activitiesChanged$.next(this._activities.slice());
   }
 
