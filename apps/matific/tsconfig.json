@@ -24,6 +24,7 @@
     "strictPropertyInitialization": false,
     "paths": {
       "@matific/*": ["apps/matific/src/app/*"],
+      "@matific-env/*": ["apps/matific/src/environments/*"],
     }
   },
   "angularCompilerOptions": {
