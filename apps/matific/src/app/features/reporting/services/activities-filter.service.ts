@@ -17,7 +17,12 @@ export class NuguActivitiesFilterService {
     private _activitiesService: NuguActivitiesService
   ) {}
 
-  filter$(className: string, studentName: string, fromDate: Date | null, toDate: Date | null): Observable<IFullActivity[]> {
+  filter$(
+    className: string,
+    studentName: string,
+    fromDate: Date | null,
+    toDate: Date | null
+  ): Observable<IFullActivity[]> {
     // if (!className) {
     //   return this._activitiesService.activitiesChanged$.pipe(
     //     map((activities) => this._transformToFullActivity(activities))
@@ -37,7 +42,7 @@ export class NuguActivitiesFilterService {
           );
         })
       );
-    } else if(className && !studentName && fromDate && !toDate) {
+    } else if (className && !studentName && fromDate && !toDate) {
       return this._classService.getAllStudentsInClass$(className).pipe(
         switchMap((students) => {
           return this._activitiesService.activitiesChanged$.pipe(
@@ -56,7 +61,7 @@ export class NuguActivitiesFilterService {
           );
         })
       );
-    } else if(className && !studentName && !fromDate && toDate) {
+    } else if (className && !studentName && !fromDate && toDate) {
       return this._classService.getAllStudentsInClass$(className).pipe(
         switchMap((students) => {
           return this._activitiesService.activitiesChanged$.pipe(
@@ -75,7 +80,7 @@ export class NuguActivitiesFilterService {
           );
         })
       );
-    } else if(className && !studentName && fromDate && toDate) {
+    } else if (className && !studentName && fromDate && toDate) {
       return this._classService.getAllStudentsInClass$(className).pipe(
         switchMap((students) => {
           return this._activitiesService.activitiesChanged$.pipe(
@@ -94,20 +99,20 @@ export class NuguActivitiesFilterService {
           );
         })
       );
-    } else if(className && studentName && !fromDate && !toDate) {
+    } else if (className && studentName && !fromDate && !toDate) {
       return this._activitiesService.activitiesChanged$.pipe(
         map((activities) => {
-          return activities.filter((activity) =>
-            activity.student === studentName
+          return activities.filter(
+            (activity) => activity.student === studentName
           );
         }),
         map((activities) => this._transformToFullActivity(activities))
       );
-    } else if(className && studentName && fromDate && !toDate) {
+    } else if (className && studentName && fromDate && !toDate) {
       return this._activitiesService.activitiesChanged$.pipe(
         map((activities) => {
-          return activities.filter((activity) =>
-            activity.student === studentName
+          return activities.filter(
+            (activity) => activity.student === studentName
           );
         }),
         map((activities) => this._transformToFullActivity(activities)),
@@ -118,11 +123,11 @@ export class NuguActivitiesFilterService {
           });
         })
       );
-    } else if(className && studentName && !fromDate && toDate) {
+    } else if (className && studentName && !fromDate && toDate) {
       return this._activitiesService.activitiesChanged$.pipe(
         map((activities) => {
-          return activities.filter((activity) =>
-            activity.student === studentName
+          return activities.filter(
+            (activity) => activity.student === studentName
           );
         }),
         map((activities) => this._transformToFullActivity(activities)),
@@ -133,11 +138,11 @@ export class NuguActivitiesFilterService {
           });
         })
       );
-    } else if(className && studentName && fromDate && toDate) {
+    } else if (className && studentName && fromDate && toDate) {
       return this._activitiesService.activitiesChanged$.pipe(
         map((activities) => {
-          return activities.filter((activity) =>
-            activity.student === studentName
+          return activities.filter(
+            (activity) => activity.student === studentName
           );
         }),
         map((activities) => this._transformToFullActivity(activities)),
