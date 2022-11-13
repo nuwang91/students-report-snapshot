@@ -223,10 +223,7 @@ export class NuguReportPageComponent implements OnDestroy {
   }
 
   _classChanged({ _, value }: { _: any; value: IClass }): void {
-    if (!value || !value.name) {
-      return;
-    }
-    this._classChanged$.next(value.name);
+    this._classChanged$.next(value?.name ?? '');
     this._studentChanged$.next('');
   }
 
