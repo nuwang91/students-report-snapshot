@@ -19,27 +19,30 @@ export interface AuthResponseData {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class NuguAuthenticationService {
-  user$ = new BehaviorSubject<User | null>(null);
-  private tokenExpirationTimer: any;
+  private _user$ = new BehaviorSubject<User | null>(null);
+  user$: Observable<User | null> = this._user$;
 
-  constructor(private http: HttpClient, private router: Router) {}
+  private _tokenExpirationTimer: any;
+
+  constructor(private _http: HttpClient, private _router: Router) {}
 
   signup(email: string, password: string): Observable<AuthResponseData> {
-    return this.http
+    return this._http
       .post<AuthResponseData>(
-        'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + WEB_API_KEY,
+        'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' +
+          WEB_API_KEY,
         {
           email: email,
           password: password,
-          returnSecureToken: true
+          returnSecureToken: true,
         }
       )
       .pipe(
         catchError(this.handleError),
-        tap(resData => {
+        tap((resData) => {
           this.handleAuthentication(
             resData.email,
             resData.localId,
@@ -51,18 +54,19 @@ export class NuguAuthenticationService {
   }
 
   login(email: string, password: string): Observable<AuthResponseData> {
-    return this.http
+    return this._http
       .post<AuthResponseData>(
-        'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' + WEB_API_KEY,
+        'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' +
+          WEB_API_KEY,
         {
           email: email,
           password: password,
-          returnSecureToken: true
+          returnSecureToken: true,
         }
       )
       .pipe(
         catchError(this.handleError),
-        tap(resData => {
+        tap((resData) => {
           this.handleAuthentication(
             resData.email,
             resData.localId,
@@ -75,7 +79,7 @@ export class NuguAuthenticationService {
 
   autoLogin(): void {
     const storedUser = localStorage.getItem('userData');
-    if(!storedUser){
+    if (!storedUser) {
       return;
     }
 
@@ -98,7 +102,7 @@ export class NuguAuthenticationService {
     );
 
     if (loadedUser.token) {
-      this.user$.next(loadedUser);
+      this._user$.next(loadedUser);
       const expirationDuration =
         new Date(userData._tokenExpirationDate).getTime() -
         new Date().getTime();
@@ -107,17 +111,17 @@ export class NuguAuthenticationService {
   }
 
   logout(): void {
-    this.user$.next(null);
-    this.router.navigate(['/auth']);
+    this._user$.next(null);
+    this._router.navigate(['/auth']);
     localStorage.removeItem('userData');
-    if (this.tokenExpirationTimer) {
-      clearTimeout(this.tokenExpirationTimer);
+    if (this._tokenExpirationTimer) {
+      clearTimeout(this._tokenExpirationTimer);
     }
-    this.tokenExpirationTimer = null;
+    this._tokenExpirationTimer = null;
   }
 
   autoLogout(expirationDuration: number): void {
-    this.tokenExpirationTimer = setTimeout(() => {
+    this._tokenExpirationTimer = setTimeout(() => {
       this.logout();
     }, expirationDuration);
   }
@@ -130,7 +134,7 @@ export class NuguAuthenticationService {
   ): void {
     const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
     const user = new User(email, userId, token, expirationDate);
-    this.user$.next(user);
+    this._user$.next(user);
     this.autoLogout(expiresIn * 1000);
     localStorage.setItem('userData', JSON.stringify(user));
   }
