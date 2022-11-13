@@ -1,0 +1,36 @@
+<p-table [value]="dataSource" [rowTrackBy]="trackBy">
+  <ng-template pTemplate="header">
+    <tr>
+      <th *ngFor="let column of columns" [pSortableColumn]="column.name">
+        {{ column.title }}
+        <p-sortIcon [field]="column.name"></p-sortIcon>
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-row>
+    <tr>
+      <td *ngFor="let column of columns">
+        <ng-container *ngIf="column.name === 'result'; else elseTemplate">
+          <span [nuguResultColor]="row[column.name]">{{
+            row[column.name]
+          }}</span>
+        </ng-container>
+        <ng-template #elseTemplate>
+          {{ row[column.name] }}
+        </ng-template>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="emptymessage">
+    <tr *ngIf="!studentSelectedWithRange; else elseTemplate">
+      <td [attr.colspan]="columns.length">no data</td>
+    </tr>
+    <ng-template #elseTemplate>
+      <tr>
+        <td [attr.colspan]="columns.length">
+          {{ noDataMessageForStudent }}
+        </td>
+      </tr>
+    </ng-template>
+  </ng-template>
+</p-table>
