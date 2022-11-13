@@ -49,7 +49,9 @@
     <nugu-status-bar [values]="(_progress$ | async) ?? []"></nugu-status-bar>
   </div>
 
-  <p-chart *ngIf="_chartIsVisible$ | async" type="bar" [data]="_chartData$ | async" [options]="_chartOptions"></p-chart>
+  <div *ngIf="_chartIsVisible$ | async" class="chart-container">
+    <p-chart type="bar" [data]="_chartData$ | async" [options]="_chartOptions"></p-chart>
+  </div>
 
   <nugu-reporting-table
     [dataSource]="(_activities$ | async) ?? []"
