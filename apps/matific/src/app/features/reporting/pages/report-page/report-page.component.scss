@@ -1,7 +1,9 @@
 
 
 .heading {
-  font-weight: normal;
+  font-weight: bold;
+  margin-block-start: 4.5rem;
+  color: #497174;
 
   @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
     text-align: center;
