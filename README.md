@@ -1,6 +1,6 @@
 # Matific Assignment
 
-This is an Angular based application build using NX. <br>
+This is an Angular based application built using NX. <br>
 All the files are being generated using NX CLI.
 
 ## Deployments
