@@ -14,5 +14,9 @@
     &:last-of-type {
       border-radius: 0 0.125rem 0.125rem 0;
     }
+
+    &:only-child {
+      border-radius: 0.125rem;
+    }
   }
 }
