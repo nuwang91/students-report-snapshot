@@ -5,7 +5,7 @@ import { Observable, of } from 'rxjs';
 import { IFullActivity } from '@matific/core/interfaces/common.interfaces';
 import { IProgressBar } from '@matific/shared/components/progress-bar/progress-bar.component';
 
-const Colors: Record<string, string> = {
+export const Colors: Record<string, string> = {
   Weak: '#D90404',
   OK: '#F26513',
   Good: '#ffc107',

@@ -5,6 +5,7 @@ import {
   OnChanges,
   SimpleChanges,
 } from '@angular/core';
+import { Colors } from '../services/status-bar-transform.service';
 
 @Directive({
   selector: '[nuguResultColor]',
@@ -31,9 +32,9 @@ export class NuguResultColorDirective implements OnChanges {
   }
 
   private _getColor(marks: number): string {
-    if (marks <= 60) return '#D90404';
-    else if (marks > 60 && marks <= 80) return '#F26513';
-    else if (marks > 80 && marks <= 90) return '#ffc107';
-    else return '#4CAF50';
+    if (marks <= 60) return Colors['Weak'];
+    else if (marks > 60 && marks <= 80) return Colors['OK'];
+    else if (marks > 80 && marks <= 90) return Colors['Good'];
+    else return Colors['Excellent'];
   }
 }
