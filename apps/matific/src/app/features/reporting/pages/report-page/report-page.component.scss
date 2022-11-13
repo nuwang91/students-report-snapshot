@@ -15,6 +15,7 @@
 .input-row {
   display: flex;
   justify-content: space-evenly;
+  margin-block-end: 2rem;
 
   @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
     flex-direction: column;
@@ -59,6 +60,7 @@
 
 .info {
   margin-block-start: 1rem;
+  margin-block-end: 2rem;
   display: flex;
   flex-direction: column;
   justify-content: center;

@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  OnChanges,
-  SimpleChanges,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 import { ILegend } from '@matific/shared/components/legend/legend.component';
 import { IProgressBar } from '@matific/shared/components/progress-bar/progress-bar.component';
@@ -15,21 +9,10 @@ import { IProgressBar } from '@matific/shared/components/progress-bar/progress-b
   styleUrls: ['./status-bar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NuguStatusBarComponent implements OnChanges {
+export class NuguStatusBarComponent {
   @Input()
   values: IProgressBar[] = [];
 
-  _legendValues: ILegend[] = [];
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (!!changes['values'] && !!changes['values'].currentValue) {
-      this._legendValues = this.values.map((value) => {
-        return {
-          status: value.status,
-          color: value.color,
-          percentage: value.percentage,
-        };
-      });
-    }
-  }
+  @Input()
+  legendValues: ILegend[] = [];
 }

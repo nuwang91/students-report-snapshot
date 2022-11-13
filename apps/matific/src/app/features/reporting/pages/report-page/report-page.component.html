@@ -41,14 +41,21 @@
       </div>
     </div>
 
-    <div class="info">
-      <span>overall results for the period:</span>
-      <span class="selectd-date-range">{{ _selectedDateRange$ | async }}</span>
-    </div>
+    <ng-container *ngIf="_selectedDateRange$ | async  as dateRangeText">
+      <div *ngIf="dateRangeText.length > 0" class="info">
+        <span>overall results for the period:</span>
+        <span class="selectd-date-range">{{ dateRangeText }}</span>
+      </div>
+    </ng-container>
 
-    <div class="progress-container">
-      <nugu-status-bar [values]="(_progress$ | async) ?? []"></nugu-status-bar>
-    </div>
+    <ng-container *ngIf="_progress$ | async as strengths">
+      <div *ngIf="strengths.length > 0" class="progress-container">
+        <nugu-status-bar
+          [values]="strengths ?? []"
+          [legendValues]="strengths ?? []"
+        ></nugu-status-bar>
+      </div>
+    </ng-container>
 
     <div *ngIf="_chartIsVisible$ | async" class="chart-container">
       <p-chart
