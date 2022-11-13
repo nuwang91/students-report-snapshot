@@ -5,7 +5,7 @@ import {
   TrackByFunction,
 } from '@angular/core';
 
-export interface NuguTableColumnInterface {
+export interface TableColumnInterface {
   name: string;
   title?: string;
 }
@@ -21,7 +21,7 @@ export class NuguReportingTableComponent<T> {
   dataSource: any[] = [];
 
   @Input()
-  columns: NuguTableColumnInterface[];
+  columns: TableColumnInterface[];
 
   @Input()
   trackBy: TrackByFunction<T>;

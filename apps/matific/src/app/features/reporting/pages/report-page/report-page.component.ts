@@ -23,9 +23,9 @@ import {
   IBarDataSet,
   NuguStatusBarTransformService,
 } from '../../services/status-bar-transform.service';
-import { NuguTableColumnInterface } from '../../components/reporting-table/reporting-table.component';
+import { TableColumnInterface } from '../../components/reporting-table/reporting-table.component';
 
-export const columns: NuguTableColumnInterface[] = [
+export const columns: TableColumnInterface[] = [
   {
     name: 'date',
     title: 'DATE COMPLETED',
@@ -70,7 +70,7 @@ export class NuguReportPageComponent {
   _chartData$: Observable<IBarDataSet>;
   _chartIsVisible$: Observable<boolean>;
 
-  _columns: NuguTableColumnInterface[];
+  _columns: TableColumnInterface[];
 
   _chartOptions = {
     plugins: {
