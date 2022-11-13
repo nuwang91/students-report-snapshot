@@ -16,3 +16,7 @@ Should enter minimum of 8 characters password for the password
 ### Login
 If a user is registered successfully, should be able to login with created credentials
 
+#### Already Created User
+username - test@matific.com
+password - test1234
+
