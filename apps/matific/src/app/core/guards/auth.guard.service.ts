@@ -16,7 +16,7 @@ import { NuguSpinnerService } from '../services/spinner.service';
 })
 export class NuguAuthGuardService {
   constructor(
-    private authenticationService: NuguAuthenticationService,
+    private _authenticationService: NuguAuthenticationService,
     private router: Router,
     private _spinnerService: NuguSpinnerService
   ) {}
@@ -30,7 +30,7 @@ export class NuguAuthGuardService {
     | Promise<boolean | UrlTree>
     | Observable<boolean | UrlTree> {
     this._spinnerService.spinning(true);
-    return this.authenticationService.user$.pipe(
+    return this._authenticationService.user$.pipe(
       take(1),
       map((user) => {
         const isAuth = !!user;
