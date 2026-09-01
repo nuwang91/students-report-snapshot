@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { map, Observable } from 'rxjs';
 
 import { NuguAuthenticationService } from './core/services/authentication.service';
@@ -8,6 +8,7 @@ import { NuguSpinnerService } from './core/services/spinner.service';
     selector: 'nugu-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class AppComponent implements OnInit {

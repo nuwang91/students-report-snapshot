@@ -1,13 +1,13 @@
 <p-table [value]="dataSource" [rowTrackBy]="trackBy">
-  <ng-template pTemplate="header">
+  <ng-template #header>
     <tr>
       <th *ngFor="let column of columns" [pSortableColumn]="column.name">
         {{ column.title }}
-        <p-sortIcon [field]="column.name"></p-sortIcon>
+        <p-sort-icon [field]="column.name"></p-sort-icon>
       </th>
     </tr>
   </ng-template>
-  <ng-template pTemplate="body" let-row>
+  <ng-template #body let-row>
     <tr>
       <td *ngFor="let column of columns">
         <ng-container *ngIf="column.name === 'result'; else elseTemplate">
@@ -21,7 +21,7 @@
       </td>
     </tr>
   </ng-template>
-  <ng-template pTemplate="emptymessage">
+  <ng-template #emptymessage>
     <tr *ngIf="!studentSelectedWithRange; else elseTemplate">
       <td [attr.colspan]="columns.length">no data</td>
     </tr>

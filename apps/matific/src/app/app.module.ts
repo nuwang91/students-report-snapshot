@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi, withXhr } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ButtonModule } from 'primeng/button';
 import { providePrimeNG } from 'primeng/config';
-import Lara from '@primeng/themes/lara';
+import Lara from '@primeuix/themes/lara';
 
 import { AppComponent } from './app.component';
 import { NuguAppRoutingModule } from './app-routing.module';
@@ -21,7 +21,7 @@ import { NuguSpinnerModule } from './shared/components/spinner/spinner.module';
         ButtonModule,
         NuguReportPageModule,
         NuguSpinnerModule], providers: [
-          provideHttpClient(withInterceptorsFromDi()),
+          provideHttpClient(withXhr(), withInterceptorsFromDi()),
           providePrimeNG({ theme: { preset: Lara } }),
         ] })
 export class AppModule {}
