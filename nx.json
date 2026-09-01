@@ -61,5 +61,6 @@
   "defaultProject": "matific",
   "nxCloudAccessToken": "NjkyNzY1MjctZjRmNi00NTQxLWFjN2EtZWVkYWFiZjA2OWM1fHJlYWQtd3JpdGU=",
   "useInferencePlugins": false,
-  "defaultBase": "master"
+  "defaultBase": "master",
+  "useLegacyCache": true
 }

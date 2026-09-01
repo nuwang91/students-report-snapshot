@@ -11,10 +11,11 @@ export interface TableColumnInterface {
 }
 
 @Component({
-  selector: 'nugu-reporting-table',
-  templateUrl: './reporting-table.component.html',
-  styleUrls: ['./reporting-table.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'nugu-reporting-table',
+    templateUrl: './reporting-table.component.html',
+    styleUrls: ['./reporting-table.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NuguReportingTableComponent<T> {
   @Input()

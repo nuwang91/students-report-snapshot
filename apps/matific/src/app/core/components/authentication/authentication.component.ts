@@ -10,10 +10,11 @@ import {
 } from '../../services/authentication.service';
 
 @Component({
-  selector: 'nugu-auth',
-  templateUrl: './authentication.component.html',
-  styleUrls: ['./authentication.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'nugu-auth',
+    templateUrl: './authentication.component.html',
+    styleUrls: ['./authentication.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NuguAuthenticationComponent {
   _isLoginMode: boolean = true;

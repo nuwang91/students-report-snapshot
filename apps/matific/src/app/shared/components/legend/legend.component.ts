@@ -7,10 +7,11 @@ export interface ILegend {
 }
 
 @Component({
-  selector: 'nugu-legend',
-  templateUrl: './legend.component.html',
-  styleUrls: ['./legend.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'nugu-legend',
+    templateUrl: './legend.component.html',
+    styleUrls: ['./legend.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NuguLegendComponent {
   @Input()
