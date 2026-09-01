@@ -3,6 +3,7 @@ import {
   Component,
   Input,
 } from '@angular/core';
+import { NgStyle } from '@angular/common';
 
 export interface IProgressBar {
   status: string;
@@ -15,7 +16,7 @@ export interface IProgressBar {
     templateUrl: './progress-bar.component.html',
     styleUrls: ['./progress-bar.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [NgStyle]
 })
 export class NuguProgressBarComponent {
   @Input()

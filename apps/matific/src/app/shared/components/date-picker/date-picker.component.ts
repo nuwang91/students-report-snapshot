@@ -5,13 +5,16 @@ import {
   Input,
   Output,
 } from '@angular/core';
+import { Bind } from 'primeng/bind';
+import { DatePicker } from 'primeng/datepicker';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'nugu-date-picker',
     templateUrl: './date-picker.component.html',
     styleUrls: ['./date-picker.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [Bind, DatePicker, ReactiveFormsModule, FormsModule]
 })
 export class NuguDatePickerComponent {
   @Input()

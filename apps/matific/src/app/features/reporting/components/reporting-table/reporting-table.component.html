@@ -1,36 +1,40 @@
 <p-table [value]="dataSource" [rowTrackBy]="trackBy">
   <ng-template #header>
     <tr>
-      <th *ngFor="let column of columns" [pSortableColumn]="column.name">
-        {{ column.title }}
-        <p-sort-icon [field]="column.name"></p-sort-icon>
-      </th>
+      @for (column of columns; track column.name) {
+        <th [pSortableColumn]="column.name">
+          {{ column.title }}
+          <p-sort-icon [field]="column.name"></p-sort-icon>
+        </th>
+      }
     </tr>
   </ng-template>
   <ng-template #body let-row>
     <tr>
-      <td *ngFor="let column of columns">
-        <ng-container *ngIf="column.name === 'result'; else elseTemplate">
-          <span [nuguResultColor]="row[column.name]">{{
-            row[column.name]
-          }}</span>
-        </ng-container>
-        <ng-template #elseTemplate>
-          {{ row[column.name] }}
-        </ng-template>
-      </td>
+      @for (column of columns; track column.name) {
+        <td>
+          @if (column.name === 'result') {
+            <span [nuguResultColor]="row[column.name]">{{
+              row[column.name]
+            }}</span>
+          } @else {
+            {{ row[column.name] }}
+          }
+        </td>
+      }
     </tr>
   </ng-template>
   <ng-template #emptymessage>
-    <tr *ngIf="!studentSelectedWithRange; else elseTemplate">
-      <td [attr.colspan]="columns.length">no data</td>
-    </tr>
-    <ng-template #elseTemplate>
+    @if (!studentSelectedWithRange) {
+      <tr>
+        <td [attr.colspan]="columns.length">no data</td>
+      </tr>
+    } @else {
       <tr>
         <td [attr.colspan]="columns.length">
           {{ noDataMessageForStudent }}
         </td>
       </tr>
-    </ng-template>
+    }
   </ng-template>
 </p-table>

@@ -8,8 +8,8 @@ describe('NuguAuthenticationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [NuguAuthenticationComponent],
-    }).compileComponents();
+    imports: [NuguAuthenticationComponent],
+}).compileComponents();
 
     fixture = TestBed.createComponent(NuguAuthenticationComponent);
     component = fixture.componentInstance;

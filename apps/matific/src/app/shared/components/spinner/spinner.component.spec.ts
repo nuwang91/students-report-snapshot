@@ -8,8 +8,8 @@ describe('NuguSpinnerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [NuguSpinnerComponent],
-    }).compileComponents();
+    imports: [NuguSpinnerComponent],
+}).compileComponents();
 
     fixture = TestBed.createComponent(NuguSpinnerComponent);
     component = fixture.componentInstance;

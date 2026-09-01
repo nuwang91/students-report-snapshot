@@ -1,11 +1,10 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 
 import {
   combineLatest,
   map,
   Observable,
   switchMap,
-  tap,
   BehaviorSubject,
   filter,
   of,
@@ -23,7 +22,13 @@ import {
   IBarDataSet,
   NuguStatusBarTransformService,
 } from '../../services/status-bar-transform.service';
-import { TableColumnInterface } from '../../components/reporting-table/reporting-table.component';
+import { TableColumnInterface, NuguReportingTableComponent } from '../../components/reporting-table/reporting-table.component';
+import { NuguDropdownComponent } from '../../../../shared/components/dropdown/dropdown.component';
+import { NuguDatePickerComponent } from '../../../../shared/components/date-picker/date-picker.component';
+import { NuguStatusBarComponent } from '../../components/status-bar/status-bar.component';
+import { Bind } from 'primeng/bind';
+import { UIChart } from 'primeng/chart';
+import { AsyncPipe } from '@angular/common';
 
 export const columns: TableColumnInterface[] = [
   {
@@ -57,9 +62,13 @@ export const columns: TableColumnInterface[] = [
     templateUrl: './report-page.component.html',
     styleUrls: ['./report-page.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [NuguDropdownComponent, NuguDatePickerComponent, NuguStatusBarComponent, Bind, UIChart, NuguReportingTableComponent, AsyncPipe]
 })
 export class NuguReportPageComponent {
+  private _classService = inject(NuguClassService);
+  private _activitiesFilterService = inject(NuguActivitiesFilterService);
+  private _statusBarTransformService = inject(NuguStatusBarTransformService);
+
   _classes$: Observable<IClass[]>;
   _students$: Observable<string[] | undefined>;
   _activities$: Observable<any[]>;
@@ -91,11 +100,7 @@ export class NuguReportPageComponent {
   private _toDateChanged$: BehaviorSubject<Date | null> =
     new BehaviorSubject<Date | null>(null);
 
-  constructor(
-    private _classService: NuguClassService,
-    private _activitiesFilterService: NuguActivitiesFilterService,
-    private _statusBarTransformService: NuguStatusBarTransformService
-  ) {
+  constructor() {
     this._classes$ = this._classService.classesChanged$;
 
     this._students$ = this._classChanged$.pipe(

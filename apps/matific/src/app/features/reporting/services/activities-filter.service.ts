@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 
 import { map, Observable, of, switchMap } from 'rxjs';
 
@@ -14,10 +14,9 @@ import { NuguClassService } from './class.service';
   providedIn: 'root',
 })
 export class NuguActivitiesFilterService {
-  constructor(
-    private _classService: NuguClassService,
-    private _activitiesService: NuguActivitiesService
-  ) {}
+  private _classService = inject(NuguClassService);
+  private _activitiesService = inject(NuguActivitiesService);
+
 
   filter$(
     className: string,

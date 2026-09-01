@@ -1,5 +1,5 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { BehaviorSubject, catchError, Observable, tap, throwError } from 'rxjs';
@@ -22,12 +22,13 @@ export interface AuthResponseData {
   providedIn: 'root',
 })
 export class NuguAuthenticationService {
+  private _http = inject(HttpClient);
+  private _router = inject(Router);
+
   private _user$ = new BehaviorSubject<User | null>(null);
   user$: Observable<User | null> = this._user$;
 
   private _tokenExpirationTimer: any;
-
-  constructor(private _http: HttpClient, private _router: Router) {}
 
   signup(email: string, password: string): Observable<AuthResponseData> {
     return this._http

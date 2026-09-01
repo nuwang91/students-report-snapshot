@@ -8,8 +8,8 @@ describe('NuguStatusBarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [NuguStatusBarComponent],
-    }).compileComponents();
+    imports: [NuguStatusBarComponent],
+}).compileComponents();
 
     fixture = TestBed.createComponent(NuguStatusBarComponent);
     component = fixture.componentInstance;

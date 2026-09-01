@@ -8,8 +8,8 @@ describe('NuguLegendComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [NuguLegendComponent],
-    }).compileComponents();
+    imports: [NuguLegendComponent],
+}).compileComponents();
 
     fixture = TestBed.createComponent(NuguLegendComponent);
     component = fixture.componentInstance;

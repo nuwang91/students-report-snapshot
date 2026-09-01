@@ -8,8 +8,8 @@ describe('NuguDropdownComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [NuguDropdownComponent],
-    }).compileComponents();
+    imports: [NuguDropdownComponent],
+}).compileComponents();
 
     fixture = TestBed.createComponent(NuguDropdownComponent);
     component = fixture.componentInstance;
