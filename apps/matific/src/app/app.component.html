@@ -1,18 +1,21 @@
 <nav class="navigator">
   <div class="logo"></div>
-  <button
-    *ngIf="hasLoggedInUser$ | async"
-    pButton
-    pRipple
-    type="button"
-    label="Logout"
-    class="p-button-text"
-    (click)="logout()"
-  ></button>
+  @if (hasLoggedInUser$ | async) {
+    <button
+      pButton
+      pRipple
+      type="button"
+      label="Logout"
+      class="p-button-text"
+      (click)="logout()"
+    ></button>
+  }
 </nav>
 <main class="main">
-  <div *ngIf="spinnerVisible$ | async" class="overlay">
-    <nugu-spinner></nugu-spinner>
-  </div>
+  @if (spinnerVisible$ | async) {
+    <div class="overlay">
+      <nugu-spinner></nugu-spinner>
+    </div>
+  }
   <router-outlet></router-outlet>
 </main>

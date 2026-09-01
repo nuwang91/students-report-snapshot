@@ -41,29 +41,35 @@
       </div>
     </div>
 
-    <ng-container *ngIf="_selectedDateRange$ | async  as dateRangeText">
-      <div *ngIf="dateRangeText.length > 0" class="info">
-        <span>overall results for the period:</span>
-        <span class="selectd-date-range">{{ dateRangeText }}</span>
-      </div>
-    </ng-container>
+    @if (_selectedDateRange$ | async ; as dateRangeText) {
+      @if (dateRangeText.length > 0) {
+        <div class="info">
+          <span>overall results for the period:</span>
+          <span class="selectd-date-range">{{ dateRangeText }}</span>
+        </div>
+      }
+    }
 
-    <ng-container *ngIf="_progress$ | async as strengths">
-      <div *ngIf="strengths.length > 0" class="progress-container">
-        <nugu-status-bar
-          [values]="strengths ?? []"
-          [legendValues]="strengths ?? []"
-        ></nugu-status-bar>
-      </div>
-    </ng-container>
+    @if (_progress$ | async; as strengths) {
+      @if (strengths.length > 0) {
+        <div class="progress-container">
+          <nugu-status-bar
+            [values]="strengths ?? []"
+            [legendValues]="strengths ?? []"
+          ></nugu-status-bar>
+        </div>
+      }
+    }
 
-    <div *ngIf="_chartIsVisible$ | async" class="chart-container">
-      <p-chart
-        type="bar"
-        [data]="_chartData$ | async"
-        [options]="_chartOptions"
-      ></p-chart>
-    </div>
+    @if (_chartIsVisible$ | async) {
+      <div class="chart-container">
+        <p-chart
+          type="bar"
+          [data]="_chartData$ | async"
+          [options]="_chartOptions"
+        ></p-chart>
+      </div>
+    }
 
     <nugu-reporting-table
       [dataSource]="(_activities$ | async) ?? []"
@@ -73,7 +79,7 @@
       "
       [noDataMessageForStudent]="(_noDataForStudent$ | async) ?? ''"
       [trackBy]="_trackBy"
-    >
+      >
     </nugu-reporting-table>
   </div>
 </div>

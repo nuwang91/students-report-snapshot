@@ -1,5 +1,7 @@
 <h1 class="heading">Login to Student Snapshot</h1>
-<span class="error-message" *ngIf="(_errorMessage | async) as message">{{message}}</span>
+@if ((_errorMessage | async); as message) {
+  <span class="error-message">{{message}}</span>
+}
 <div class="login-container">
   <form [formGroup]="_userForm" (ngSubmit)="_login()">
     <div class="user-group">
@@ -14,52 +16,54 @@
         }"
         pInputText
         formControlName="user"
-      />
-      <small
-        *ngIf="_userForm.get('user')?.touched && !_userForm.get('user')?.valid"
-        id="username-help"
-        class="p-error"
-        >Username is invalid.</small
-      >
-    </div>
+        />
+      @if (_userForm.get('user')?.touched && !_userForm.get('user')?.valid) {
+        <small
+          id="username-help"
+          class="p-error"
+          >Username is invalid.</small
+          >
+        }
+      </div>
 
-    <div class="password-group">
-      <label for="password">Password</label>
-      <input
-        id="password"
-        type="password"
-        aria-describedby="password-help"
+      <div class="password-group">
+        <label for="password">Password</label>
+        <input
+          id="password"
+          type="password"
+          aria-describedby="password-help"
         [ngClass]="{
           'ng-invalid':
             _userForm.get('password')?.touched &&
             !_userForm.get('password')?.valid
         }"
-        pInputText
-        formControlName="password"
-      />
-      <small
-        *ngIf="
+          pInputText
+          formControlName="password"
+          />
+        @if (
           _userForm.get('password')?.touched &&
           !_userForm.get('password')?.valid
-        "
-        id="password-help"
-        class="p-error"
-        >Password is invalid.</small
-      >
-    </div>
+          ) {
+          <small
+            id="password-help"
+            class="p-error"
+            >Password is invalid.</small
+            >
+          }
+        </div>
 
-    <div class="button-container">
-      <p-button
-        class="submit"
-        type="submit"
-        [disabled]="!_userForm.valid"
-        [label]="_isLoginMode ? 'Login' : 'Sign Up'"
-      ></p-button>
-      <p-button
-        type="button"
-        [label]="'Switch to ' + (_isLoginMode ? 'Sign Up' : 'Login')"
-        (onClick)="_onSwitchMode()"
-      ></p-button>
+        <div class="button-container">
+          <p-button
+            class="submit"
+            type="submit"
+            [disabled]="!_userForm.valid"
+            [label]="_isLoginMode ? 'Login' : 'Sign Up'"
+          ></p-button>
+          <p-button
+            type="button"
+            [label]="'Switch to ' + (_isLoginMode ? 'Sign Up' : 'Login')"
+            (onClick)="_onSwitchMode()"
+          ></p-button>
+        </div>
+      </form>
     </div>
-  </form>
-</div>
