@@ -53,10 +53,11 @@ export const columns: TableColumnInterface[] = [
 ];
 
 @Component({
-  selector: 'nugu-report-page',
-  templateUrl: './report-page.component.html',
-  styleUrls: ['./report-page.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'nugu-report-page',
+    templateUrl: './report-page.component.html',
+    styleUrls: ['./report-page.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NuguReportPageComponent {
   _classes$: Observable<IClass[]>;

@@ -4,10 +4,11 @@ import { ILegend } from '@matific/shared/components/legend/legend.component';
 import { IProgressBar } from '@matific/shared/components/progress-bar/progress-bar.component';
 
 @Component({
-  selector: 'nugu-status-bar',
-  templateUrl: './status-bar.component.html',
-  styleUrls: ['./status-bar.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'nugu-status-bar',
+    templateUrl: './status-bar.component.html',
+    styleUrls: ['./status-bar.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NuguStatusBarComponent {
   @Input()

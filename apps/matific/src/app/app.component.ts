@@ -5,9 +5,10 @@ import { NuguAuthenticationService } from './core/services/authentication.servic
 import { NuguSpinnerService } from './core/services/spinner.service';
 
 @Component({
-  selector: 'nugu-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+    selector: 'nugu-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss'],
+    standalone: false
 })
 export class AppComponent implements OnInit {
   title = 'matific';

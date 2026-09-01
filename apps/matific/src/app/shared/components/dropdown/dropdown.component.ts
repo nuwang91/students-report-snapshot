@@ -7,10 +7,11 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'nugu-dropdown',
-  templateUrl: './dropdown.component.html',
-  styleUrls: ['./dropdown.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'nugu-dropdown',
+    templateUrl: './dropdown.component.html',
+    styleUrls: ['./dropdown.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NuguDropdownComponent {
   @Input()

@@ -8,7 +8,8 @@ import {
 import { Colors } from '../services/status-bar-transform.service';
 
 @Directive({
-  selector: '[nuguResultColor]',
+    selector: '[nuguResultColor]',
+    standalone: false
 })
 export class NuguResultColorDirective implements OnChanges {
   @Input()
