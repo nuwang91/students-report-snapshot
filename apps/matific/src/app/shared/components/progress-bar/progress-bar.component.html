@@ -1,7 +1,8 @@
 <div class="progress-bar-bar">
-  <div
-    class="progress-bar-section"
-    *ngFor="let value of values"
-    [ngStyle]="{ 'width': value.percentage + '%', 'background-color': value.color }"
-  ></div>
+  @for (value of values; track value) {
+    <div
+      class="progress-bar-section"
+      [ngStyle]="{ 'width': value.percentage + '%', 'background-color': value.color }"
+    ></div>
+  }
 </div>

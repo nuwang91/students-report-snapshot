@@ -4,6 +4,7 @@
   "projectType": "application",
   "sourceRoot": "apps/matific/src",
   "prefix": "nugu",
+  "tags": [],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
@@ -68,7 +69,8 @@
       "defaultConfiguration": "development",
       "options": {
         "proxyConfig": "apps/matific/src/proxy.conf.json"
-      }
+      },
+      "continuous": true
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
@@ -83,9 +85,9 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/matific/jest.config.ts"
+        "jestConfig": "apps/matific/jest.config.ts",
+        "tsConfig": "apps/matific/tsconfig.spec.json"
       }
     }
-  },
-  "tags": []
+  }
 }
