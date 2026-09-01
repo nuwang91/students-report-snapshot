@@ -24,8 +24,11 @@
     "strictPropertyInitialization": false,
     "paths": {
       "@matific/*": ["apps/matific/src/app/*"],
-      "@matific-env/*": ["apps/matific/src/environments/*"],
-    }
+      "@matific-env/*": ["apps/matific/src/environments/*"]
+    },
+    "module": "preserve",
+    "moduleResolution": "bundler",
+    "lib": ["dom", "es2022"]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
