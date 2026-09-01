@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot } from '@angular/router';
 
 import { Observable, tap, zip } from 'rxjs';
 
@@ -12,7 +12,7 @@ import { NuguReportDataService } from './report-data.service';
 
 @Injectable({ providedIn: 'root' })
 export class NuguDataResolverService
-  implements Resolve<Observable<[IActivityResponse, IClass[]]>>
+  
 {
   constructor(
     private _reportDataService: NuguReportDataService,
