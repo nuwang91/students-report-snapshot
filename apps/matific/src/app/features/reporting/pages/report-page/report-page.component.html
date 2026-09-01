@@ -65,7 +65,7 @@
       <div class="chart-container">
         <p-chart
           type="bar"
-          [data]="_chartData$ | async"
+          [data]="(_chartData$ | async) ?? undefined"
           [options]="_chartOptions"
         ></p-chart>
       </div>
