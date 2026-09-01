@@ -1,10 +1,5 @@
-import { Injectable } from '@angular/core';
-import {
-  ActivatedRouteSnapshot,
-  Router,
-  RouterStateSnapshot,
-  UrlTree,
-} from '@angular/router';
+import { Injectable, inject } from '@angular/core';
+import { Router, UrlTree } from '@angular/router';
 
 import { map, Observable, take } from 'rxjs';
 
@@ -15,16 +10,11 @@ import { NuguSpinnerService } from '../services/spinner.service';
   providedIn: 'root',
 })
 export class NuguAuthGuardService {
-  constructor(
-    private _authenticationService: NuguAuthenticationService,
-    private _router: Router,
-    private _spinnerService: NuguSpinnerService
-  ) {}
+  private _authenticationService = inject(NuguAuthenticationService);
+  private _router = inject(Router);
+  private _spinnerService = inject(NuguSpinnerService);
 
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    router: RouterStateSnapshot
-  ):
+  canActivate():
     | boolean
     | UrlTree
     | Promise<boolean | UrlTree>

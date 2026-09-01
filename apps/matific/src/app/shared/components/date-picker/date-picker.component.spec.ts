@@ -8,8 +8,8 @@ describe('NuguDatePickerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [NuguDatePickerComponent],
-    }).compileComponents();
+    imports: [NuguDatePickerComponent],
+}).compileComponents();
 
     fixture = TestBed.createComponent(NuguDatePickerComponent);
     component = fixture.componentInstance;

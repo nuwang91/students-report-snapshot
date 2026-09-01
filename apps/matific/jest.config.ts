@@ -1,4 +1,3 @@
-/* eslint-disable */
 module.exports = {
   displayName: 'matific',
   preset: '../../jest.preset.js',

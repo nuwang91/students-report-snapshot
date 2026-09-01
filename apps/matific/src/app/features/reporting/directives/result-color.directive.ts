@@ -7,10 +7,7 @@ import {
 } from '@angular/core';
 import { Colors } from '../services/status-bar-transform.service';
 
-@Directive({
-    selector: '[nuguResultColor]',
-    standalone: false
-})
+@Directive({ selector: '[nuguResultColor]' })
 export class NuguResultColorDirective implements OnChanges {
   @Input()
   nuguResultColor: string;

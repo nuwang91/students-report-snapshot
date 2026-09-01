@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { Observable, BehaviorSubject } from 'rxjs';
@@ -8,15 +8,22 @@ import {
   AuthResponseData,
   NuguAuthenticationService,
 } from '../../services/authentication.service';
+import { Bind } from 'primeng/bind';
+import { InputText } from 'primeng/inputtext';
+import { NgClass, AsyncPipe } from '@angular/common';
+import { Button } from 'primeng/button';
 
 @Component({
     selector: 'nugu-auth',
     templateUrl: './authentication.component.html',
     styleUrls: ['./authentication.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    imports: [ReactiveFormsModule, Bind, InputText, NgClass, Button, AsyncPipe]
 })
 export class NuguAuthenticationComponent {
+  private _authenticationService = inject(NuguAuthenticationService);
+  private router = inject(Router);
+
   _isLoginMode: boolean = true;
 
   private _error: BehaviorSubject<string> = new BehaviorSubject<string>('');
@@ -29,11 +36,6 @@ export class NuguAuthenticationComponent {
       Validators.minLength(8),
     ]),
   });
-
-  constructor(
-    private _authenticationService: NuguAuthenticationService,
-    private router: Router
-  ) {}
 
   _onSwitchMode(): void {
     this._isLoginMode = !this._isLoginMode;
@@ -56,7 +58,7 @@ export class NuguAuthenticationComponent {
     }
 
     authObs.subscribe({
-      next: (resData) => {
+      next: () => {
         this.router.navigate(['/report']);
       },
       error: (errorMessage) => {

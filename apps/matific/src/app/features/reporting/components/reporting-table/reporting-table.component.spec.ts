@@ -8,8 +8,8 @@ describe('NuguReportingTableComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [NuguReportingTableComponent],
-    }).compileComponents();
+    imports: [NuguReportingTableComponent],
+}).compileComponents();
 
     fixture = TestBed.createComponent(NuguReportingTableComponent);
     component = fixture.componentInstance;

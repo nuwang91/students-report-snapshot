@@ -8,8 +8,8 @@ describe('NuguProgressBarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [NuguProgressBarComponent],
-    }).compileComponents();
+    imports: [NuguProgressBarComponent],
+}).compileComponents();
 
     fixture = TestBed.createComponent(NuguProgressBarComponent);
     component = fixture.componentInstance;

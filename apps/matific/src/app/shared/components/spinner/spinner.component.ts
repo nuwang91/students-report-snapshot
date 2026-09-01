@@ -4,7 +4,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     selector: 'nugu-spinner',
     templateUrl: './spinner.component.html',
     styleUrls: ['./spinner.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NuguSpinnerComponent {}
