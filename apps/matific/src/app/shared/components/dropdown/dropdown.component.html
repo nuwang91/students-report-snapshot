@@ -2,7 +2,7 @@
   [inputId]="id"
   [options]="options"
   [(ngModel)]="value"
-  [optionLabel]="optionName"
+  [optionLabel]="optionName || undefined"
   [placeholder]="placeholder"
   [showClear]="showClear"
   (onChange)="onChange($event)"
