@@ -61,10 +61,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "matific:build:production"
+          "buildTarget": "matific:build:production"
         },
         "development": {
-          "browserTarget": "matific:build:development"
+          "buildTarget": "matific:build:development"
         }
       },
       "defaultConfiguration": "development",
@@ -75,21 +75,17 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "matific:build"
+        "buildTarget": "matific:build"
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "options": {
-        "lintFilePatterns": ["apps/matific/**/*.ts", "apps/matific/**/*.html"]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/matific/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "apps/matific/jest.config.ts"
       }
     }
   },
